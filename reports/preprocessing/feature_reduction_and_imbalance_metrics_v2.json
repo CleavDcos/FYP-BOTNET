@@ -1,0 +1,187 @@
+{
+  "canonical_22_features": [
+    "proto",
+    "flgs",
+    "state",
+    "sport",
+    "dport",
+    "pkts",
+    "spkts",
+    "dpkts",
+    "dur",
+    "mean",
+    "stddev",
+    "min",
+    "rate",
+    "TnBPSrcIP",
+    "TnBPDstIP",
+    "TnP_PSrcIP",
+    "TnP_PDstIP",
+    "TnP_PerProto",
+    "TnP_Per_Dport",
+    "N_IN_Conn_P_DstIP",
+    "N_IN_Conn_P_SrcIP",
+    "Pkts_P_State_P_Protocol_P_SrcIP"
+  ],
+  "excluded_12_features": [
+    "bytes",
+    "sbytes",
+    "dbytes",
+    "sum",
+    "srate",
+    "drate",
+    "AR_P_Proto_P_Dport",
+    "max",
+    "Pkts_P_State_P_Protocol_P_DestIP",
+    "AR_P_Proto_P_Sport",
+    "AR_P_Proto_P_SrcIP",
+    "AR_P_Proto_P_DstIP"
+  ],
+  "split_row_counts": {
+    "train": 2567965,
+    "val": 550278,
+    "test": 550279
+  },
+  "clean_split_columns": [
+    "proto",
+    "flgs",
+    "state",
+    "sport",
+    "dport",
+    "pkts",
+    "spkts",
+    "dpkts",
+    "dur",
+    "mean",
+    "stddev",
+    "min",
+    "rate",
+    "TnBPSrcIP",
+    "TnBPDstIP",
+    "TnP_PSrcIP",
+    "TnP_PDstIP",
+    "TnP_PerProto",
+    "TnP_Per_Dport",
+    "N_IN_Conn_P_DstIP",
+    "N_IN_Conn_P_SrcIP",
+    "Pkts_P_State_P_Protocol_P_SrcIP",
+    "attack",
+    "category",
+    "subcategory"
+  ],
+  "class_weights": {
+    "binary_weights": {
+      "0": 3844.259,
+      "1": 0.5001
+    },
+    "category_weights": {
+      "DDoS": 0.381,
+      "DoS": 0.4444,
+      "Normal": 1537.7036,
+      "Reconnaissance": 8.0555,
+      "Theft": 9338.0545
+    },
+    "subcategory_weights": {
+      "Data_Exfiltration": 80248.9062,
+      "HTTP": 185.3323,
+      "Keylogging": 6294.0319,
+      "Normal": 961.0647,
+      "OS_Fingerprint": 25.5977,
+      "Service_Scan": 6.2674,
+      "TCP": 0.2878,
+      "UDP": 0.2315
+    }
+  },
+  "category_counts": {
+    "original_train": {
+      "DDoS": 1348005,
+      "DoS": 1155814,
+      "Reconnaissance": 63757,
+      "Normal": 334,
+      "Theft": 55
+    },
+    "ros_train": {
+      "DDoS": 1348005,
+      "DoS": 1155814,
+      "Reconnaissance": 63757,
+      "Normal": 10000,
+      "Theft": 5000
+    },
+    "smote_train": {
+      "DDoS": 1348005,
+      "DoS": 1155814,
+      "Reconnaissance": 63757,
+      "Normal": 10000,
+      "Theft": 5000
+    },
+    "val": {
+      "DDoS": 289275,
+      "DoS": 247257,
+      "Reconnaissance": 13662,
+      "Normal": 72,
+      "Theft": 12
+    },
+    "test": {
+      "DDoS": 289344,
+      "DoS": 247189,
+      "Reconnaissance": 13663,
+      "Normal": 71,
+      "Theft": 12
+    }
+  },
+  "binary_counts": {
+    "original_train": {
+      "1": 2567631,
+      "0": 334
+    },
+    "ros_train": {
+      "1": 2567631,
+      "0": 10000
+    },
+    "smote_train": {
+      "1": 2567631,
+      "0": 10000
+    },
+    "val": {
+      "1": 550206,
+      "0": 72
+    },
+    "test": {
+      "1": 550208,
+      "0": 71
+    }
+  },
+  "subcategory_counts": {
+    "original_train": {
+      "UDP": 1386861,
+      "TCP": 1115226,
+      "Service_Scan": 51217,
+      "OS_Fingerprint": 12540,
+      "HTTP": 1732,
+      "Normal": 334,
+      "Keylogging": 51,
+      "Data_Exfiltration": 4
+    },
+    "val": {
+      "UDP": 297184,
+      "TCP": 238977,
+      "Service_Scan": 10975,
+      "OS_Fingerprint": 2687,
+      "HTTP": 371,
+      "Normal": 72,
+      "Keylogging": 11,
+      "Data_Exfiltration": 1
+    },
+    "test": {
+      "UDP": 297185,
+      "TCP": 238977,
+      "Service_Scan": 10976,
+      "OS_Fingerprint": 2687,
+      "HTTP": 371,
+      "Normal": 71,
+      "Keylogging": 11,
+      "Data_Exfiltration": 1
+    }
+  },
+  "elapsed_seconds": 92.71
+}

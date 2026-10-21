@@ -1,0 +1,79 @@
+{
+  "raw_files": [
+    "UNSW_2018_IoT_Botnet_Full5pc_1.csv",
+    "UNSW_2018_IoT_Botnet_Full5pc_2.csv",
+    "UNSW_2018_IoT_Botnet_Full5pc_3.csv",
+    "UNSW_2018_IoT_Botnet_Full5pc_4.csv"
+  ],
+  "total_rows": 3668522,
+  "total_columns": 37,
+  "retained_feature_count": 34,
+  "target_count": 3,
+  "excluded_features_count": 9,
+  "hex_ports_converted": {
+    "sport": 9052,
+    "dport": 9052
+  },
+  "attack_distribution": {
+    "1": 3668045,
+    "0": 477
+  },
+  "category_distribution": {
+    "DoS": 1650260,
+    "DDoS": 1926624,
+    "Reconnaissance": 91082,
+    "Normal": 477,
+    "Theft": 79
+  },
+  "subcategory_distribution": {
+    "TCP": 1593180,
+    "HTTP": 2474,
+    "UDP": 1981230,
+    "Service_Scan": 73168,
+    "OS_Fingerprint": 17914,
+    "Normal": 477,
+    "Keylogging": 73,
+    "Data_Exfiltration": 6
+  },
+  "final_dtypes": {
+    "flgs": "object",
+    "proto": "object",
+    "sport": "int64",
+    "dport": "int64",
+    "pkts": "int64",
+    "bytes": "int64",
+    "state": "object",
+    "dur": "float64",
+    "mean": "float64",
+    "stddev": "float64",
+    "sum": "float64",
+    "min": "float64",
+    "max": "float64",
+    "spkts": "int64",
+    "dpkts": "int64",
+    "sbytes": "int64",
+    "dbytes": "int64",
+    "rate": "float64",
+    "srate": "float64",
+    "drate": "float64",
+    "TnBPSrcIP": "int64",
+    "TnBPDstIP": "int64",
+    "TnP_PSrcIP": "int64",
+    "TnP_PDstIP": "int64",
+    "TnP_PerProto": "int64",
+    "TnP_Per_Dport": "int64",
+    "AR_P_Proto_P_SrcIP": "float64",
+    "AR_P_Proto_P_DstIP": "float64",
+    "N_IN_Conn_P_DstIP": "int64",
+    "N_IN_Conn_P_SrcIP": "int64",
+    "AR_P_Proto_P_Sport": "float64",
+    "AR_P_Proto_P_Dport": "float64",
+    "Pkts_P_State_P_Protocol_P_DestIP": "int64",
+    "Pkts_P_State_P_Protocol_P_SrcIP": "int64",
+    "attack": "int32",
+    "category": "object",
+    "subcategory": "object"
+  },
+  "parquet_size_mb": 74.98,
+  "elapsed_seconds": 20.65
+}

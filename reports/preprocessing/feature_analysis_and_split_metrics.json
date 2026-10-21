@@ -1,0 +1,330 @@
+{
+  "split_sizes": {
+    "train": 2567965,
+    "val": 550278,
+    "test": 550279,
+    "total": 3668522
+  },
+  "split_percentages": {
+    "train": 70.0,
+    "val": 15.0,
+    "test": 15.0
+  },
+  "distributions": {
+    "attack": {
+      "train": {
+        "1": 2567631,
+        "0": 334
+      },
+      "val": {
+        "1": 550206,
+        "0": 72
+      },
+      "test": {
+        "1": 550208,
+        "0": 71
+      }
+    },
+    "category": {
+      "train": {
+        "DDoS": 1348005,
+        "DoS": 1155814,
+        "Reconnaissance": 63757,
+        "Normal": 334,
+        "Theft": 55
+      },
+      "val": {
+        "DDoS": 289275,
+        "DoS": 247257,
+        "Reconnaissance": 13662,
+        "Normal": 72,
+        "Theft": 12
+      },
+      "test": {
+        "DDoS": 289344,
+        "DoS": 247189,
+        "Reconnaissance": 13663,
+        "Normal": 71,
+        "Theft": 12
+      }
+    },
+    "subcategory": {
+      "train": {
+        "UDP": 1386861,
+        "TCP": 1115226,
+        "Service_Scan": 51217,
+        "OS_Fingerprint": 12540,
+        "HTTP": 1732,
+        "Normal": 334,
+        "Keylogging": 51,
+        "Data_Exfiltration": 4
+      },
+      "val": {
+        "UDP": 297184,
+        "TCP": 238977,
+        "Service_Scan": 10975,
+        "OS_Fingerprint": 2687,
+        "HTTP": 371,
+        "Normal": 72,
+        "Keylogging": 11,
+        "Data_Exfiltration": 1
+      },
+      "test": {
+        "UDP": 297185,
+        "TCP": 238977,
+        "Service_Scan": 10976,
+        "OS_Fingerprint": 2687,
+        "HTTP": 371,
+        "Normal": 71,
+        "Keylogging": 11,
+        "Data_Exfiltration": 1
+      }
+    }
+  },
+  "high_corr_pairs": [
+    {
+      "feature_1": "dpkts",
+      "feature_2": "dbytes",
+      "correlation": 0.9983,
+      "abs_corr": 0.9983
+    },
+    {
+      "feature_1": "pkts",
+      "feature_2": "bytes",
+      "correlation": 0.9803,
+      "abs_corr": 0.9803
+    },
+    {
+      "feature_1": "spkts",
+      "feature_2": "sbytes",
+      "correlation": 0.9612,
+      "abs_corr": 0.9612
+    },
+    {
+      "feature_1": "bytes",
+      "feature_2": "sbytes",
+      "correlation": 0.9456,
+      "abs_corr": 0.9456
+    },
+    {
+      "feature_1": "pkts",
+      "feature_2": "spkts",
+      "correlation": 0.9427,
+      "abs_corr": 0.9427
+    },
+    {
+      "feature_1": "pkts",
+      "feature_2": "sbytes",
+      "correlation": 0.9386,
+      "abs_corr": 0.9386
+    },
+    {
+      "feature_1": "rate",
+      "feature_2": "AR_P_Proto_P_Dport",
+      "correlation": 0.9244,
+      "abs_corr": 0.9244
+    },
+    {
+      "feature_1": "mean",
+      "feature_2": "max",
+      "correlation": 0.9087,
+      "abs_corr": 0.9087
+    },
+    {
+      "feature_1": "Pkts_P_State_P_Protocol_P_DestIP",
+      "feature_2": "Pkts_P_State_P_Protocol_P_SrcIP",
+      "correlation": 0.9018,
+      "abs_corr": 0.9018
+    },
+    {
+      "feature_1": "spkts",
+      "feature_2": "TnBPDstIP",
+      "correlation": 0.8994,
+      "abs_corr": 0.8994
+    },
+    {
+      "feature_1": "bytes",
+      "feature_2": "spkts",
+      "correlation": 0.8951,
+      "abs_corr": 0.8951
+    },
+    {
+      "feature_1": "TnP_PDstIP",
+      "feature_2": "TnP_Per_Dport",
+      "correlation": 0.8869,
+      "abs_corr": 0.8869
+    },
+    {
+      "feature_1": "sbytes",
+      "feature_2": "TnBPDstIP",
+      "correlation": 0.8663,
+      "abs_corr": 0.8663
+    }
+  ],
+  "attack_correlations": {
+    "sport": 0.0009,
+    "dport": -0.00387,
+    "pkts": -0.22307,
+    "bytes": -0.20034,
+    "dur": -0.10971,
+    "mean": 0.01338,
+    "stddev": 0.01213,
+    "sum": -0.17221,
+    "min": 0.00578,
+    "max": 0.01557,
+    "spkts": -0.24176,
+    "dpkts": -0.1263,
+    "sbytes": -0.21851,
+    "dbytes": -0.12228,
+    "rate": -0.00092,
+    "srate": -0.06095,
+    "drate": -0.00093,
+    "TnBPSrcIP": -0.27471,
+    "TnBPDstIP": -0.24417,
+    "TnP_PSrcIP": -0.22198,
+    "TnP_PDstIP": -0.189,
+    "TnP_PerProto": -0.78415,
+    "TnP_Per_Dport": -0.18341,
+    "AR_P_Proto_P_SrcIP": -0.00026,
+    "AR_P_Proto_P_DstIP": -0.00208,
+    "N_IN_Conn_P_DstIP": 0.05272,
+    "N_IN_Conn_P_SrcIP": 0.02901,
+    "AR_P_Proto_P_Sport": 0.0003,
+    "AR_P_Proto_P_Dport": 0.00038,
+    "Pkts_P_State_P_Protocol_P_DestIP": -0.08731,
+    "Pkts_P_State_P_Protocol_P_SrcIP": -0.07885
+  },
+  "mutual_info_attack": {
+    "sport": 0.0,
+    "dport": 0.00014,
+    "pkts": 0.00019,
+    "bytes": 3e-05,
+    "dur": 0.00011,
+    "mean": 9e-05,
+    "stddev": 0.00019,
+    "sum": 0.00013,
+    "min": 0.0,
+    "max": 0.0001,
+    "spkts": 0.00023,
+    "dpkts": 0.0,
+    "sbytes": 0.00027,
+    "dbytes": 0.0,
+    "rate": 0.00018,
+    "srate": 0.00023,
+    "drate": 0.0,
+    "TnBPSrcIP": 0.00035,
+    "TnBPDstIP": 0.00056,
+    "TnP_PSrcIP": 0.0004,
+    "TnP_PDstIP": 0.0008,
+    "TnP_PerProto": 0.00107,
+    "TnP_Per_Dport": 0.0006,
+    "AR_P_Proto_P_SrcIP": 4e-05,
+    "AR_P_Proto_P_DstIP": 0.00022,
+    "N_IN_Conn_P_DstIP": 0.00823,
+    "N_IN_Conn_P_SrcIP": 0.00491,
+    "AR_P_Proto_P_Sport": 0.00018,
+    "AR_P_Proto_P_Dport": 0.00024,
+    "Pkts_P_State_P_Protocol_P_DestIP": 0.00066,
+    "Pkts_P_State_P_Protocol_P_SrcIP": 0.00059
+  },
+  "mutual_info_category": {
+    "sport": 0.07473,
+    "dport": 0.11301,
+    "pkts": 0.15024,
+    "bytes": 0.27582,
+    "dur": 0.72248,
+    "mean": 0.39913,
+    "stddev": 0.34569,
+    "sum": 0.48133,
+    "min": 0.2899,
+    "max": 0.41293,
+    "spkts": 0.15661,
+    "dpkts": 0.02687,
+    "sbytes": 0.29173,
+    "dbytes": 0.02553,
+    "rate": 0.57341,
+    "srate": 0.55736,
+    "drate": 0.04889,
+    "TnBPSrcIP": 0.26629,
+    "TnBPDstIP": 0.37469,
+    "TnP_PSrcIP": 0.17504,
+    "TnP_PDstIP": 0.22712,
+    "TnP_PerProto": 0.20858,
+    "TnP_Per_Dport": 0.22898,
+    "AR_P_Proto_P_SrcIP": 0.5488,
+    "AR_P_Proto_P_DstIP": 0.54249,
+    "N_IN_Conn_P_DstIP": 0.20446,
+    "N_IN_Conn_P_SrcIP": 0.02353,
+    "AR_P_Proto_P_Sport": 0.59041,
+    "AR_P_Proto_P_Dport": 0.50149,
+    "Pkts_P_State_P_Protocol_P_DestIP": 0.19908,
+    "Pkts_P_State_P_Protocol_P_SrcIP": 0.17148
+  },
+  "variances": {
+    "sport": 365443844.7714,
+    "dport": 11024782.87532,
+    "pkts": 11593.27741,
+    "bytes": 10811976529.1593,
+    "dur": 459.15235,
+    "mean": 2.3045,
+    "stddev": 0.64586,
+    "sum": 57.54994,
+    "min": 2.20111,
+    "max": 3.46448,
+    "spkts": 5849.55745,
+    "dpkts": 1915.73496,
+    "sbytes": 5040328433.61287,
+    "dbytes": 1891523942.85,
+    "rate": 60313965.66832,
+    "srate": 176722.92912,
+    "drate": 3284.68672,
+    "TnBPSrcIP": 201984120937.97028,
+    "TnBPDstIP": 171254705087.32404,
+    "TnP_PSrcIP": 347836.55948,
+    "TnP_PDstIP": 335531.03127,
+    "TnP_PerProto": 2058189.46756,
+    "TnP_Per_Dport": 432981.99182,
+    "AR_P_Proto_P_SrcIP": 65706540.91967,
+    "AR_P_Proto_P_DstIP": 16287418.52886,
+    "N_IN_Conn_P_DstIP": 330.17673,
+    "N_IN_Conn_P_SrcIP": 595.24242,
+    "AR_P_Proto_P_Sport": 195649005.61006,
+    "AR_P_Proto_P_Dport": 234349812.78793,
+    "Pkts_P_State_P_Protocol_P_DestIP": 195583.5579,
+    "Pkts_P_State_P_Protocol_P_SrcIP": 183932.40693
+  },
+  "categorical_distributions": {
+    "flgs": {
+      "e": 1605506,
+      "e s": 871496,
+      "e g": 66132,
+      "eU": 24190,
+      "e *": 539,
+      "e d": 96,
+      "e   t": 3,
+      "e &": 2,
+      "e  D": 1
+    },
+    "proto": {
+      "udp": 1397431,
+      "tcp": 1164045,
+      "icmp": 6333,
+      "arp": 150,
+      "ipv6-icmp": 6
+    },
+    "state": {
+      "INT": 1397270,
+      "REQ": 614807,
+      "RST": 542987,
+      "URP": 6261,
+      "FIN": 4466,
+      "ACC": 1726,
+      "CON": 370,
+      "ECO": 53,
+      "MAS": 11,
+      "TST": 8,
+      "NRS": 6
+    }
+  },
+  "elapsed_seconds": 36.98
+}

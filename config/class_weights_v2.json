@@ -1,0 +1,23 @@
+{
+  "binary_weights": {
+    "0": 3844.259,
+    "1": 0.5001
+  },
+  "category_weights": {
+    "DDoS": 0.381,
+    "DoS": 0.4444,
+    "Normal": 1537.7036,
+    "Reconnaissance": 8.0555,
+    "Theft": 9338.0545
+  },
+  "subcategory_weights": {
+    "Data_Exfiltration": 80248.9062,
+    "HTTP": 185.3323,
+    "Keylogging": 6294.0319,
+    "Normal": 961.0647,
+    "OS_Fingerprint": 25.5977,
+    "Service_Scan": 6.2674,
+    "TCP": 0.2878,
+    "UDP": 0.2315
+  }
+}
