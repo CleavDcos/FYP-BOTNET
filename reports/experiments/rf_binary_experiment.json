@@ -1,0 +1,116 @@
+{
+  "model_name": "RandomForestClassifier",
+  "stage": 5,
+  "task": "binary_detection",
+  "target_column": "attack",
+  "features": [
+    "proto",
+    "flgs",
+    "state",
+    "sport",
+    "dport",
+    "pkts",
+    "spkts",
+    "dpkts",
+    "dur",
+    "mean",
+    "stddev",
+    "min",
+    "rate",
+    "TnBPSrcIP",
+    "TnBPDstIP",
+    "TnP_PSrcIP",
+    "TnP_PDstIP",
+    "TnP_PerProto",
+    "TnP_Per_Dport",
+    "N_IN_Conn_P_DstIP",
+    "N_IN_Conn_P_SrcIP",
+    "Pkts_P_State_P_Protocol_P_SrcIP"
+  ],
+  "feature_count": 22,
+  "train_dataset": "botnet_train_v2_clean.parquet",
+  "val_dataset": "botnet_val_v2_clean.parquet",
+  "train_samples": 2567965,
+  "val_samples": 550278,
+  "model_hyperparameters": {
+    "n_estimators": 100,
+    "max_depth": 20,
+    "min_samples_split": 10,
+    "min_samples_leaf": 5,
+    "class_weight": "balanced",
+    "random_state": 42,
+    "n_jobs": -1,
+    "verbose": 1
+  },
+  "training_time_seconds": 52.96,
+  "validation_evaluation_time_seconds": 3.46,
+  "model_save_path": "models\\rf_binary_pipeline.joblib",
+  "metrics": {
+    "accuracy": 1.0,
+    "precision_macro": 1.0,
+    "recall_macro": 1.0,
+    "f1_macro": 1.0,
+    "precision_weighted": 1.0,
+    "recall_weighted": 1.0,
+    "f1_weighted": 1.0,
+    "normal_class_metrics": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "support": 72,
+      "pr_auc": 1.0
+    },
+    "attack_class_metrics": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "support": 550206,
+      "pr_auc": 1.0
+    },
+    "confusion_matrix": {
+      "true_negatives_normal": 72,
+      "false_positives_normal_flagged_as_attack": 0,
+      "false_negatives_attack_missed": 0,
+      "true_positives_attack_detected": 550206,
+      "matrix_format": [
+        [
+          72,
+          0
+        ],
+        [
+          0,
+          550206
+        ]
+      ]
+    },
+    "false_positive_rate": 0.0,
+    "roc_auc": 1.0,
+    "classification_report": {
+      "Normal (0)": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 72.0
+      },
+      "Attack (1)": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 550206.0
+      },
+      "accuracy": 1.0,
+      "macro avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 550278.0
+      },
+      "weighted avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 550278.0
+      }
+    }
+  }
+}

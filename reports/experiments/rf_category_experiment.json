@@ -1,0 +1,407 @@
+{
+  "model_name": "RandomForestClassifier",
+  "stage": "5B",
+  "task": "attack_category_classification",
+  "target_column": "category",
+  "target_categories": [
+    "DDoS",
+    "DoS",
+    "Reconnaissance",
+    "Theft"
+  ],
+  "features": [
+    "proto",
+    "flgs",
+    "state",
+    "sport",
+    "dport",
+    "pkts",
+    "spkts",
+    "dpkts",
+    "dur",
+    "mean",
+    "stddev",
+    "min",
+    "rate",
+    "TnBPSrcIP",
+    "TnBPDstIP",
+    "TnP_PSrcIP",
+    "TnP_PDstIP",
+    "TnP_PerProto",
+    "TnP_Per_Dport",
+    "N_IN_Conn_P_DstIP",
+    "N_IN_Conn_P_SrcIP",
+    "Pkts_P_State_P_Protocol_P_SrcIP"
+  ],
+  "feature_count": 22,
+  "train_dataset": "botnet_train_v2_clean.parquet",
+  "val_dataset": "botnet_val_v2_clean.parquet",
+  "train_category_counts": {
+    "DDoS": 1348005,
+    "DoS": 1155814,
+    "Reconnaissance": 63757,
+    "Theft": 55
+  },
+  "val_category_counts": {
+    "DDoS": 289275,
+    "DoS": 247257,
+    "Reconnaissance": 13662,
+    "Theft": 12
+  },
+  "model_hyperparameters": {
+    "n_estimators": 100,
+    "max_depth": 20,
+    "min_samples_split": 10,
+    "min_samples_leaf": 5,
+    "class_weight": "balanced",
+    "random_state": 42,
+    "n_jobs": -1,
+    "verbose": 1
+  },
+  "training_time_seconds": 103.63,
+  "validation_evaluation_time_seconds": 12.88,
+  "model_save_path": "models\\rf_category_pipeline.joblib",
+  "metrics": {
+    "overall_accuracy": 0.9999418399653948,
+    "precision_macro": 0.9997438635095093,
+    "recall_macro": 0.9999707291487501,
+    "f1_macro": 0.9998572396196048,
+    "precision_weighted": 0.999941862232711,
+    "recall_weighted": 0.9999418399653948,
+    "f1_weighted": 0.9999418450677582,
+    "per_class_metrics": {
+      "DDoS": {
+        "precision": 0.9999827144531371,
+        "recall": 0.9999274047186932,
+        "f1_score": 0.9999550588210891,
+        "support": 289275,
+        "reliable_evaluation": true
+      },
+      "DoS": {
+        "precision": 0.9999433794386475,
+        "recall": 0.9999555118763068,
+        "f1_score": 0.9999494456206763,
+        "support": 247257,
+        "reliable_evaluation": true
+      },
+      "Reconnaissance": {
+        "precision": 0.9990493601462522,
+        "recall": 1.0,
+        "f1_score": 0.9995244540366536,
+        "support": 13662,
+        "reliable_evaluation": true
+      },
+      "Theft": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "support": 12,
+        "reliable_evaluation": false
+      }
+    },
+    "underrepresented_classes_flags": {
+      "Theft": "Support of 12 samples is below the reliability threshold (50). Metrics should be interpreted with caution due to high variance."
+    },
+    "confusion_matrix": {
+      "labels": [
+        "DDoS",
+        "DoS",
+        "Reconnaissance",
+        "Theft"
+      ],
+      "matrix": [
+        [
+          289254,
+          14,
+          7,
+          0
+        ],
+        [
+          5,
+          247246,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          13662,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          12
+        ]
+      ]
+    },
+    "classification_report": {
+      "DDoS": {
+        "precision": 0.9999827144531371,
+        "recall": 0.9999274047186932,
+        "f1-score": 0.9999550588210891,
+        "support": 289275.0
+      },
+      "DoS": {
+        "precision": 0.9999433794386475,
+        "recall": 0.9999555118763068,
+        "f1-score": 0.9999494456206763,
+        "support": 247257.0
+      },
+      "Reconnaissance": {
+        "precision": 0.9990493601462522,
+        "recall": 1.0,
+        "f1-score": 0.9995244540366536,
+        "support": 13662.0
+      },
+      "Theft": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 12.0
+      },
+      "accuracy": 0.9999418399653948,
+      "macro avg": {
+        "precision": 0.9997438635095093,
+        "recall": 0.9999707291487501,
+        "f1-score": 0.9998572396196048,
+        "support": 550206.0
+      },
+      "weighted avg": {
+        "precision": 0.999941862232711,
+        "recall": 0.9999418399653948,
+        "f1-score": 0.9999418450677582,
+        "support": 550206.0
+      }
+    }
+  },
+  "feature_importances_top_15": [
+    {
+      "feature": "dur",
+      "importance": 0.198337
+    },
+    {
+      "feature": "N_IN_Conn_P_DstIP",
+      "importance": 0.109957
+    },
+    {
+      "feature": "TnP_Per_Dport",
+      "importance": 0.101322
+    },
+    {
+      "feature": "rate",
+      "importance": 0.084197
+    },
+    {
+      "feature": "TnP_PerProto",
+      "importance": 0.065656
+    },
+    {
+      "feature": "stddev",
+      "importance": 0.05321
+    },
+    {
+      "feature": "TnBPDstIP",
+      "importance": 0.050858
+    },
+    {
+      "feature": "dport",
+      "importance": 0.043682
+    },
+    {
+      "feature": "TnP_PDstIP",
+      "importance": 0.040049
+    },
+    {
+      "feature": "N_IN_Conn_P_SrcIP",
+      "importance": 0.038477
+    },
+    {
+      "feature": "mean",
+      "importance": 0.026708
+    },
+    {
+      "feature": "pkts",
+      "importance": 0.022277
+    },
+    {
+      "feature": "TnBPSrcIP",
+      "importance": 0.021168
+    },
+    {
+      "feature": "dpkts",
+      "importance": 0.020156
+    },
+    {
+      "feature": "spkts",
+      "importance": 0.019975
+    }
+  ],
+  "all_feature_importances": [
+    {
+      "feature": "dur",
+      "importance": 0.198337
+    },
+    {
+      "feature": "N_IN_Conn_P_DstIP",
+      "importance": 0.109957
+    },
+    {
+      "feature": "TnP_Per_Dport",
+      "importance": 0.101322
+    },
+    {
+      "feature": "rate",
+      "importance": 0.084197
+    },
+    {
+      "feature": "TnP_PerProto",
+      "importance": 0.065656
+    },
+    {
+      "feature": "stddev",
+      "importance": 0.05321
+    },
+    {
+      "feature": "TnBPDstIP",
+      "importance": 0.050858
+    },
+    {
+      "feature": "dport",
+      "importance": 0.043682
+    },
+    {
+      "feature": "TnP_PDstIP",
+      "importance": 0.040049
+    },
+    {
+      "feature": "N_IN_Conn_P_SrcIP",
+      "importance": 0.038477
+    },
+    {
+      "feature": "mean",
+      "importance": 0.026708
+    },
+    {
+      "feature": "pkts",
+      "importance": 0.022277
+    },
+    {
+      "feature": "TnBPSrcIP",
+      "importance": 0.021168
+    },
+    {
+      "feature": "dpkts",
+      "importance": 0.020156
+    },
+    {
+      "feature": "spkts",
+      "importance": 0.019975
+    },
+    {
+      "feature": "min",
+      "importance": 0.019168
+    },
+    {
+      "feature": "Pkts_P_State_P_Protocol_P_SrcIP",
+      "importance": 0.018297
+    },
+    {
+      "feature": "TnP_PSrcIP",
+      "importance": 0.013234
+    },
+    {
+      "feature": "sport",
+      "importance": 0.007577
+    },
+    {
+      "feature": "proto_udp",
+      "importance": 0.007492
+    },
+    {
+      "feature": "state_FIN",
+      "importance": 0.006485
+    },
+    {
+      "feature": "state_RST",
+      "importance": 0.005771
+    },
+    {
+      "feature": "state_INT",
+      "importance": 0.00568
+    },
+    {
+      "feature": "state_REQ",
+      "importance": 0.004452
+    },
+    {
+      "feature": "flgs_e s",
+      "importance": 0.00353
+    },
+    {
+      "feature": "proto_arp",
+      "importance": 0.003523
+    },
+    {
+      "feature": "flgs_e",
+      "importance": 0.002809
+    },
+    {
+      "feature": "proto_tcp",
+      "importance": 0.002644
+    },
+    {
+      "feature": "state_URP",
+      "importance": 0.001431
+    },
+    {
+      "feature": "state_CON",
+      "importance": 0.001172
+    },
+    {
+      "feature": "flgs_e g",
+      "importance": 0.000367
+    },
+    {
+      "feature": "proto_icmp",
+      "importance": 0.000249
+    },
+    {
+      "feature": "flgs_eU",
+      "importance": 6.7e-05
+    },
+    {
+      "feature": "state_ACC",
+      "importance": 1.6e-05
+    },
+    {
+      "feature": "flgs_e d",
+      "importance": 5e-06
+    },
+    {
+      "feature": "flgs_e *",
+      "importance": 1e-06
+    },
+    {
+      "feature": "flgs_e   t",
+      "importance": 0.0
+    },
+    {
+      "feature": "flgs_e  D",
+      "importance": 0.0
+    },
+    {
+      "feature": "state_ECO",
+      "importance": 0.0
+    },
+    {
+      "feature": "state_MAS",
+      "importance": 0.0
+    },
+    {
+      "feature": "state_TST",
+      "importance": 0.0
+    }
+  ]
+}

@@ -1,0 +1,726 @@
+{
+  "experiment": "Stage 5 Binary XGBoost Controlled Imbalance Weighting Experiment",
+  "train_samples": 2567965,
+  "val_samples": 550278,
+  "train_class_counts": {
+    "1": 2567631,
+    "0": 334
+  },
+  "val_class_counts": {
+    "1": 550206,
+    "0": 72
+  },
+  "baselines": {
+    "random_forest_balanced": {
+      "model_name": "RandomForestClassifier",
+      "class_weight": "balanced",
+      "training_time_seconds": 52.96,
+      "metrics": {
+        "accuracy": 1.0,
+        "precision_macro": 1.0,
+        "recall_macro": 1.0,
+        "f1_macro": 1.0,
+        "precision_weighted": 1.0,
+        "recall_weighted": 1.0,
+        "f1_weighted": 1.0,
+        "normal_class_metrics": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1_score": 1.0,
+          "support": 72,
+          "pr_auc": 1.0
+        },
+        "attack_class_metrics": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1_score": 1.0,
+          "support": 550206,
+          "pr_auc": 1.0
+        },
+        "confusion_matrix": {
+          "true_negatives_normal": 72,
+          "false_positives_normal_flagged_as_attack": 0,
+          "false_negatives_attack_missed": 0,
+          "true_positives_attack_detected": 550206,
+          "matrix_format": [
+            [
+              72,
+              0
+            ],
+            [
+              0,
+              550206
+            ]
+          ]
+        },
+        "false_positive_rate": 0.0,
+        "roc_auc": 1.0,
+        "classification_report": {
+          "Normal (0)": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 72.0
+          },
+          "Attack (1)": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 550206.0
+          },
+          "accuracy": 1.0,
+          "macro avg": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 550278.0
+          },
+          "weighted avg": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 550278.0
+          }
+        }
+      }
+    },
+    "xgboost_unweighted": {
+      "model_name": "XGBClassifier",
+      "class_weight": "unweighted (default)",
+      "training_time_seconds": 13.54,
+      "metrics": {
+        "accuracy": 0.9999890964203548,
+        "precision_macro": 0.9791639404150445,
+        "recall_macro": 0.9791639404150445,
+        "f1_macro": 0.9791639404150445,
+        "precision_weighted": 0.9999890964203548,
+        "recall_weighted": 0.9999890964203548,
+        "f1_weighted": 0.9999890964203548,
+        "normal_class_metrics": {
+          "precision": 0.9583333333333334,
+          "recall": 0.9583333333333334,
+          "f1_score": 0.9583333333333334,
+          "support": 72,
+          "pr_auc": 0.9979505310649415
+        },
+        "attack_class_metrics": {
+          "precision": 0.9999945474967558,
+          "recall": 0.9999945474967558,
+          "f1_score": 0.9999945474967558,
+          "support": 550206,
+          "pr_auc": 0.9999999999636636
+        },
+        "confusion_matrix": {
+          "true_negatives_normal": 69,
+          "false_positives_normal_flagged_as_attack": 3,
+          "false_negatives_attack_missed": 3,
+          "true_positives_attack_detected": 550203,
+          "matrix_format": [
+            [
+              69,
+              3
+            ],
+            [
+              3,
+              550203
+            ]
+          ],
+          "labels_order": [
+            "Normal (0)",
+            "Attack (1)"
+          ]
+        },
+        "false_positive_rate": 0.041666666666666664,
+        "roc_auc": 0.9999997223262237,
+        "classification_report": {
+          "Normal (0)": {
+            "precision": 0.9583333333333334,
+            "recall": 0.9583333333333334,
+            "f1-score": 0.9583333333333334,
+            "support": 72.0
+          },
+          "Attack (1)": {
+            "precision": 0.9999945474967558,
+            "recall": 0.9999945474967558,
+            "f1-score": 0.9999945474967558,
+            "support": 550206.0
+          },
+          "accuracy": 0.9999890964203548,
+          "macro avg": {
+            "precision": 0.9791639404150445,
+            "recall": 0.9791639404150445,
+            "f1-score": 0.9791639404150445,
+            "support": 550278.0
+          },
+          "weighted avg": {
+            "precision": 0.9999890964203548,
+            "recall": 0.9999890964203548,
+            "f1-score": 0.9999890964203548,
+            "support": 550278.0
+          }
+        }
+      }
+    }
+  },
+  "candidates": {
+    "sample_weight_balanced": {
+      "candidate_id": "sample_weight_balanced",
+      "description": "compute_sample_weight('balanced', y_train) on training samples",
+      "weighting_type": "sample_weight_balanced",
+      "scale_pos_weight": null,
+      "hyperparameters": {
+        "n_estimators": 100,
+        "max_depth": 6,
+        "learning_rate": 0.1,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": -1,
+        "eval_metric": "logloss"
+      },
+      "training_time_seconds": 11.12,
+      "validation_evaluation_time_seconds": 0.18,
+      "model_save_path": "models\\xgb_binary_sample_weight_balanced_pipeline.joblib",
+      "model_size_mb": 0.14,
+      "metrics": {
+        "accuracy": 0.9999963654734516,
+        "precision_macro": 0.9864864864864865,
+        "recall_macro": 0.9999981824989186,
+        "f1_macro": 0.9931497761793144,
+        "precision_weighted": 0.9999964637038989,
+        "recall_weighted": 0.9999963654734516,
+        "f1_weighted": 0.9999963903641662,
+        "normal_class_metrics": {
+          "precision": 0.972972972972973,
+          "recall": 1.0,
+          "f1_score": 0.9863013698630136,
+          "support": 72,
+          "pr_auc": 1.0
+        },
+        "attack_class_metrics": {
+          "precision": 1.0,
+          "recall": 0.9999963649978372,
+          "f1_score": 0.9999981824956152,
+          "support": 550206,
+          "pr_auc": 1.0
+        },
+        "confusion_matrix": {
+          "true_negatives_normal": 72,
+          "false_positives_normal_flagged_as_attack": 0,
+          "false_negatives_attack_missed": 2,
+          "true_positives_attack_detected": 550204,
+          "matrix_format": [
+            [
+              72,
+              0
+            ],
+            [
+              2,
+              550204
+            ]
+          ],
+          "labels_order": [
+            "Normal (0)",
+            "Attack (1)"
+          ]
+        },
+        "false_positive_rate": 0.0,
+        "roc_auc": 1.0,
+        "classification_report": {
+          "Normal (0)": {
+            "precision": 0.972972972972973,
+            "recall": 1.0,
+            "f1-score": 0.9863013698630136,
+            "support": 72.0
+          },
+          "Attack (1)": {
+            "precision": 1.0,
+            "recall": 0.9999963649978372,
+            "f1-score": 0.9999981824956152,
+            "support": 550206.0
+          },
+          "accuracy": 0.9999963654734516,
+          "macro avg": {
+            "precision": 0.9864864864864865,
+            "recall": 0.9999981824989186,
+            "f1-score": 0.9931497761793144,
+            "support": 550278.0
+          },
+          "weighted avg": {
+            "precision": 0.9999964637038989,
+            "recall": 0.9999963654734516,
+            "f1-score": 0.9999963903641662,
+            "support": 550278.0
+          }
+        }
+      },
+      "feature_importances": {
+        "N_IN_Conn_P_DstIP": 0.5179386734962463,
+        "TnP_PDstIP": 0.34274032711982727,
+        "TnBPDstIP": 0.021607492119073868,
+        "N_IN_Conn_P_SrcIP": 0.019521377980709076,
+        "proto_arp": 0.011443911120295525,
+        "flgs_e s": 0.009865217842161655,
+        "dur": 0.009392199106514454,
+        "stddev": 0.008891962468624115,
+        "state_URP": 0.008623192086815834,
+        "flgs_e g": 0.008226304315030575,
+        "pkts": 0.006013399921357632,
+        "proto_icmp": 0.005402972921729088,
+        "dpkts": 0.0040260422974824905,
+        "TnP_PerProto": 0.0035652187652885914,
+        "state_FIN": 0.0034562370274215937,
+        "TnP_Per_Dport": 0.003385936375707388,
+        "flgs_e": 0.0033599622547626495,
+        "dport": 0.0023353658616542816,
+        "flgs_eU": 0.001991736702620983,
+        "state_REQ": 0.001512763206847012,
+        "mean": 0.0011053452035412192,
+        "state_RST": 0.001086809323169291,
+        "TnBPSrcIP": 0.0009301454992964864,
+        "spkts": 0.00082129065413028,
+        "min": 0.0008027616422623396,
+        "TnP_PSrcIP": 0.0005669340025633574,
+        "Pkts_P_State_P_Protocol_P_SrcIP": 0.0005580370780080557,
+        "sport": 0.000409289583330974,
+        "proto_tcp": 0.00011173911480000243,
+        "proto_udp": 9.590436093276367e-05,
+        "state_NRS": 9.392761421622708e-05,
+        "proto_ipv6-icmp": 5.701558984583244e-05,
+        "rate": 3.271383320679888e-05,
+        "state_INT": 1.7039355952874757e-05,
+        "state_CON": 1.0711029972299002e-05,
+        "flgs_e   t": 0.0,
+        "flgs_e  D": 0.0,
+        "flgs_e &": 0.0,
+        "flgs_e *": 0.0,
+        "flgs_e d": 0.0,
+        "state_ACC": 0.0,
+        "state_ECO": 0.0,
+        "state_MAS": 0.0,
+        "state_TST": 0.0
+      }
+    },
+    "scale_pos_exact_ratio": {
+      "candidate_id": "scale_pos_exact_ratio",
+      "description": "scale_pos_weight=0.00013008 (N_neg / N_pos = 334 / 2567631)",
+      "weighting_type": "scale_pos_weight",
+      "scale_pos_weight": 0.000130080996841057,
+      "hyperparameters": {
+        "n_estimators": 100,
+        "max_depth": 6,
+        "learning_rate": 0.1,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": -1,
+        "eval_metric": "logloss",
+        "scale_pos_weight": 0.000130080996841057
+      },
+      "training_time_seconds": 8.48,
+      "validation_evaluation_time_seconds": 0.14,
+      "model_save_path": "models\\xgb_binary_scale_pos_exact_ratio_pipeline.joblib",
+      "model_size_mb": 0.09,
+      "metrics": {
+        "accuracy": 0.9987624437102701,
+        "precision_macro": 0.547808764940239,
+        "recall_macro": 0.9993811408817788,
+        "f1_macro": 0.5869631061017317,
+        "precision_weighted": 0.9998816679244881,
+        "recall_weighted": 0.9987624437102701,
+        "f1_weighted": 0.999272833768949,
+        "normal_class_metrics": {
+          "precision": 0.09561752988047809,
+          "recall": 1.0,
+          "f1_score": 0.17454545454545456,
+          "support": 72,
+          "pr_auc": 0.7951046159190112
+        },
+        "attack_class_metrics": {
+          "precision": 1.0,
+          "recall": 0.9987622817635576,
+          "f1_score": 0.999380757658009,
+          "support": 550206,
+          "pr_auc": 0.9999999982923765
+        },
+        "confusion_matrix": {
+          "true_negatives_normal": 72,
+          "false_positives_normal_flagged_as_attack": 0,
+          "false_negatives_attack_missed": 681,
+          "true_positives_attack_detected": 549525,
+          "matrix_format": [
+            [
+              72,
+              0
+            ],
+            [
+              681,
+              549525
+            ]
+          ],
+          "labels_order": [
+            "Normal (0)",
+            "Attack (1)"
+          ]
+        },
+        "false_positive_rate": 0.0,
+        "roc_auc": 0.9999869493325125,
+        "classification_report": {
+          "Normal (0)": {
+            "precision": 0.09561752988047809,
+            "recall": 1.0,
+            "f1-score": 0.17454545454545456,
+            "support": 72.0
+          },
+          "Attack (1)": {
+            "precision": 1.0,
+            "recall": 0.9987622817635576,
+            "f1-score": 0.999380757658009,
+            "support": 550206.0
+          },
+          "accuracy": 0.9987624437102701,
+          "macro avg": {
+            "precision": 0.547808764940239,
+            "recall": 0.9993811408817788,
+            "f1-score": 0.5869631061017317,
+            "support": 550278.0
+          },
+          "weighted avg": {
+            "precision": 0.9998816679244881,
+            "recall": 0.9987624437102701,
+            "f1-score": 0.999272833768949,
+            "support": 550278.0
+          }
+        }
+      },
+      "feature_importances": {
+        "TnP_PDstIP": 0.4170870780944824,
+        "N_IN_Conn_P_DstIP": 0.4055708944797516,
+        "pkts": 0.040659815073013306,
+        "dur": 0.0361933670938015,
+        "state_CON": 0.016447069123387337,
+        "dport": 0.016396692022681236,
+        "N_IN_Conn_P_SrcIP": 0.011422504670917988,
+        "TnP_PerProto": 0.011279655620455742,
+        "flgs_e": 0.008201248943805695,
+        "TnP_Per_Dport": 0.00806235522031784,
+        "Pkts_P_State_P_Protocol_P_SrcIP": 0.007050777319818735,
+        "stddev": 0.00597220566123724,
+        "min": 0.00452373968437314,
+        "sport": 0.004476083442568779,
+        "rate": 0.0033501731231808662,
+        "dpkts": 0.001532317721284926,
+        "proto_tcp": 0.0010156211210414767,
+        "TnBPSrcIP": 0.0007584755076095462,
+        "proto_arp": 0.0,
+        "proto_icmp": 0.0,
+        "proto_ipv6-icmp": 0.0,
+        "proto_udp": 0.0,
+        "flgs_e   t": 0.0,
+        "flgs_e  D": 0.0,
+        "flgs_e &": 0.0,
+        "flgs_e *": 0.0,
+        "flgs_e d": 0.0,
+        "flgs_e g": 0.0,
+        "flgs_e s": 0.0,
+        "flgs_eU": 0.0,
+        "state_ACC": 0.0,
+        "state_ECO": 0.0,
+        "state_FIN": 0.0,
+        "state_INT": 0.0,
+        "state_MAS": 0.0,
+        "state_NRS": 0.0,
+        "state_REQ": 0.0,
+        "state_RST": 0.0,
+        "state_TST": 0.0,
+        "state_URP": 0.0,
+        "spkts": 0.0,
+        "mean": 0.0,
+        "TnBPDstIP": 0.0,
+        "TnP_PSrcIP": 0.0
+      }
+    },
+    "scale_pos_mild_dampened": {
+      "candidate_id": "scale_pos_mild_dampened",
+      "description": "scale_pos_weight=0.001 (mild dampening of attack class weight)",
+      "weighting_type": "scale_pos_weight",
+      "scale_pos_weight": 0.001,
+      "hyperparameters": {
+        "n_estimators": 100,
+        "max_depth": 6,
+        "learning_rate": 0.1,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": -1,
+        "eval_metric": "logloss",
+        "scale_pos_weight": 0.001
+      },
+      "training_time_seconds": 8.64,
+      "validation_evaluation_time_seconds": 0.14,
+      "model_save_path": "models\\xgb_binary_scale_pos_mild_dampened_pipeline.joblib",
+      "model_size_mb": 0.09,
+      "metrics": {
+        "accuracy": 0.9999073195730158,
+        "precision_macro": 0.7926829268292683,
+        "recall_macro": 0.999953653722424,
+        "f1_macro": 0.8692075950179428,
+        "precision_weighted": 0.9999457480427411,
+        "recall_weighted": 0.9999073195730158,
+        "f1_weighted": 0.9999194371733642,
+        "normal_class_metrics": {
+          "precision": 0.5853658536585366,
+          "recall": 1.0,
+          "f1_score": 0.7384615384615385,
+          "support": 72,
+          "pr_auc": 0.8572049631968816
+        },
+        "attack_class_metrics": {
+          "precision": 1.0,
+          "recall": 0.9999073074448479,
+          "f1_score": 0.999953651574347,
+          "support": 550206,
+          "pr_auc": 0.9999999987349434
+        },
+        "confusion_matrix": {
+          "true_negatives_normal": 72,
+          "false_positives_normal_flagged_as_attack": 0,
+          "false_negatives_attack_missed": 51,
+          "true_positives_attack_detected": 550155,
+          "matrix_format": [
+            [
+              72,
+              0
+            ],
+            [
+              51,
+              550155
+            ]
+          ],
+          "labels_order": [
+            "Normal (0)",
+            "Attack (1)"
+          ]
+        },
+        "false_positive_rate": 0.0,
+        "roc_auc": 0.9999903319039699,
+        "classification_report": {
+          "Normal (0)": {
+            "precision": 0.5853658536585366,
+            "recall": 1.0,
+            "f1-score": 0.7384615384615385,
+            "support": 72.0
+          },
+          "Attack (1)": {
+            "precision": 1.0,
+            "recall": 0.9999073074448479,
+            "f1-score": 0.999953651574347,
+            "support": 550206.0
+          },
+          "accuracy": 0.9999073195730158,
+          "macro avg": {
+            "precision": 0.7926829268292683,
+            "recall": 0.999953653722424,
+            "f1-score": 0.8692075950179428,
+            "support": 550278.0
+          },
+          "weighted avg": {
+            "precision": 0.9999457480427411,
+            "recall": 0.9999073195730158,
+            "f1-score": 0.9999194371733642,
+            "support": 550278.0
+          }
+        }
+      },
+      "feature_importances": {
+        "N_IN_Conn_P_DstIP": 0.3869333267211914,
+        "TnP_PDstIP": 0.28968313336372375,
+        "TnBPDstIP": 0.062360577285289764,
+        "pkts": 0.0470060296356678,
+        "spkts": 0.03906543180346489,
+        "flgs_e s": 0.03651886805891991,
+        "stddev": 0.02447407878935337,
+        "state_RST": 0.0243129450827837,
+        "TnP_Per_Dport": 0.02027950994670391,
+        "flgs_e": 0.011973575688898563,
+        "dport": 0.010003810748457909,
+        "state_CON": 0.00926637277007103,
+        "dur": 0.006679180543869734,
+        "TnP_PerProto": 0.005526129622012377,
+        "N_IN_Conn_P_SrcIP": 0.0046424251049757,
+        "Pkts_P_State_P_Protocol_P_SrcIP": 0.004359199199825525,
+        "sport": 0.003552181413397193,
+        "TnBPSrcIP": 0.002958639757707715,
+        "TnP_PSrcIP": 0.002910653594881296,
+        "rate": 0.0028662369586527348,
+        "mean": 0.0020019938237965107,
+        "min": 0.0013787454226985574,
+        "dpkts": 0.0012469488428905606,
+        "proto_arp": 0.0,
+        "proto_icmp": 0.0,
+        "proto_ipv6-icmp": 0.0,
+        "proto_tcp": 0.0,
+        "proto_udp": 0.0,
+        "flgs_e   t": 0.0,
+        "flgs_e  D": 0.0,
+        "flgs_e &": 0.0,
+        "flgs_e *": 0.0,
+        "flgs_e d": 0.0,
+        "flgs_e g": 0.0,
+        "flgs_eU": 0.0,
+        "state_ACC": 0.0,
+        "state_ECO": 0.0,
+        "state_FIN": 0.0,
+        "state_INT": 0.0,
+        "state_MAS": 0.0,
+        "state_NRS": 0.0,
+        "state_REQ": 0.0,
+        "state_TST": 0.0,
+        "state_URP": 0.0
+      }
+    },
+    "scale_pos_moderate_dampened": {
+      "candidate_id": "scale_pos_moderate_dampened",
+      "description": "scale_pos_weight=0.01 (moderate dampening of attack class weight)",
+      "weighting_type": "scale_pos_weight",
+      "scale_pos_weight": 0.01,
+      "hyperparameters": {
+        "n_estimators": 100,
+        "max_depth": 6,
+        "learning_rate": 0.1,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": -1,
+        "eval_metric": "logloss",
+        "scale_pos_weight": 0.01
+      },
+      "training_time_seconds": 8.92,
+      "validation_evaluation_time_seconds": 0.15,
+      "model_save_path": "models\\xgb_binary_scale_pos_moderate_dampened_pipeline.joblib",
+      "model_size_mb": 0.1,
+      "metrics": {
+        "accuracy": 0.9999654719977902,
+        "precision_macro": 0.8956043956043955,
+        "recall_macro": 0.9999827337397266,
+        "f1_macro": 0.9417091581318418,
+        "precision_weighted": 0.9999726811411087,
+        "recall_weighted": 0.9999654719977902,
+        "f1_weighted": 0.9999674840679271,
+        "normal_class_metrics": {
+          "precision": 0.7912087912087912,
+          "recall": 1.0,
+          "f1_score": 0.8834355828220859,
+          "support": 72,
+          "pr_auc": 0.9766060092075014
+        },
+        "attack_class_metrics": {
+          "precision": 1.0,
+          "recall": 0.9999654674794531,
+          "f1_score": 0.9999827334415977,
+          "support": 550206,
+          "pr_auc": 0.9999999996069142
+        },
+        "confusion_matrix": {
+          "true_negatives_normal": 72,
+          "false_positives_normal_flagged_as_attack": 0,
+          "false_negatives_attack_missed": 19,
+          "true_positives_attack_detected": 550187,
+          "matrix_format": [
+            [
+              72,
+              0
+            ],
+            [
+              19,
+              550187
+            ]
+          ],
+          "labels_order": [
+            "Normal (0)",
+            "Attack (1)"
+          ]
+        },
+        "false_positive_rate": 0.0,
+        "roc_auc": 0.9999969960746016,
+        "classification_report": {
+          "Normal (0)": {
+            "precision": 0.7912087912087912,
+            "recall": 1.0,
+            "f1-score": 0.8834355828220859,
+            "support": 72.0
+          },
+          "Attack (1)": {
+            "precision": 1.0,
+            "recall": 0.9999654674794531,
+            "f1-score": 0.9999827334415977,
+            "support": 550206.0
+          },
+          "accuracy": 0.9999654719977902,
+          "macro avg": {
+            "precision": 0.8956043956043955,
+            "recall": 0.9999827337397266,
+            "f1-score": 0.9417091581318418,
+            "support": 550278.0
+          },
+          "weighted avg": {
+            "precision": 0.9999726811411087,
+            "recall": 0.9999654719977902,
+            "f1-score": 0.9999674840679271,
+            "support": 550278.0
+          }
+        }
+      },
+      "feature_importances": {
+        "TnP_PDstIP": 0.39399453997612,
+        "proto_udp": 0.18606169521808624,
+        "N_IN_Conn_P_DstIP": 0.07853446900844574,
+        "flgs_e s": 0.04146026447415352,
+        "proto_icmp": 0.040000058710575104,
+        "state_CON": 0.02937205880880356,
+        "state_URP": 0.02492481656372547,
+        "sport": 0.023612866178154945,
+        "flgs_e": 0.023525025695562363,
+        "pkts": 0.022612905129790306,
+        "TnP_Per_Dport": 0.021124066784977913,
+        "TnBPDstIP": 0.020796313881874084,
+        "proto_arp": 0.015677472576498985,
+        "dport": 0.01344725489616394,
+        "spkts": 0.009343752637505531,
+        "min": 0.009230355732142925,
+        "TnP_PerProto": 0.008914150297641754,
+        "state_RST": 0.006197015754878521,
+        "proto_ipv6-icmp": 0.005804819520562887,
+        "N_IN_Conn_P_SrcIP": 0.003974481485784054,
+        "dpkts": 0.003769584931433201,
+        "stddev": 0.00366574595682323,
+        "TnP_PSrcIP": 0.0030883504077792168,
+        "Pkts_P_State_P_Protocol_P_SrcIP": 0.0029019583016633987,
+        "TnBPSrcIP": 0.0028850026428699493,
+        "proto_tcp": 0.0023398338817059994,
+        "dur": 0.001352613908238709,
+        "rate": 0.0011225314810872078,
+        "mean": 0.0002661093312781304,
+        "flgs_e   t": 0.0,
+        "flgs_e  D": 0.0,
+        "flgs_e &": 0.0,
+        "flgs_e *": 0.0,
+        "flgs_e d": 0.0,
+        "flgs_e g": 0.0,
+        "flgs_eU": 0.0,
+        "state_ACC": 0.0,
+        "state_ECO": 0.0,
+        "state_FIN": 0.0,
+        "state_INT": 0.0,
+        "state_MAS": 0.0,
+        "state_NRS": 0.0,
+        "state_REQ": 0.0,
+        "state_TST": 0.0
+      }
+    }
+  }
+}

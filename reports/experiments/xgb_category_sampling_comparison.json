@@ -1,0 +1,577 @@
+{
+  "experiment": "Stage 5B XGBoost Attack-Category Experiments (Clean Weighted, ROS, SMOTE)",
+  "model_architecture": "XGBClassifier (hist tree_method)",
+  "validation_samples": 550206,
+  "validation_counts": {
+    "DDoS": 289275,
+    "DoS": 247257,
+    "Reconnaissance": 13662,
+    "Theft": 12
+  },
+  "target_classes": [
+    "DDoS",
+    "DoS",
+    "Reconnaissance",
+    "Theft"
+  ],
+  "experiments": {
+    "clean_weighted": {
+      "strategy": "clean_weighted",
+      "description": "Clean training data with compute_sample_weight('balanced')",
+      "training_samples": 2567631,
+      "training_counts": {
+        "DDoS": 1348005,
+        "DoS": 1155814,
+        "Reconnaissance": 63757,
+        "Theft": 55
+      },
+      "hyperparameters": {
+        "n_estimators": 100,
+        "max_depth": 6,
+        "learning_rate": 0.1,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": -1,
+        "objective": "multi:softprob",
+        "num_class": 4,
+        "eval_metric": "mlogloss"
+      },
+      "used_sample_weight": true,
+      "training_time_seconds": 42.16,
+      "evaluation_time_seconds": 0.37,
+      "model_path": "models\\xgb_category_clean_weighted_pipeline.joblib",
+      "metrics": {
+        "overall_accuracy": 0.999696477319404,
+        "precision_macro": 0.9997820076902335,
+        "recall_macro": 0.9998527363833073,
+        "f1_macro": 0.9998173403765743,
+        "precision_weighted": 0.9996965990747059,
+        "recall_weighted": 0.999696477319404,
+        "f1_weighted": 0.9996964826048664,
+        "per_class_metrics": {
+          "DDoS": {
+            "precision": 0.9999377477122284,
+            "recall": 0.999491833030853,
+            "f1_score": 0.9997147406473831,
+            "support": 289275,
+            "reliable_evaluation": true
+          },
+          "DoS": {
+            "precision": 0.9994098220168727,
+            "recall": 0.9999191125023761,
+            "f1_score": 0.9996644023936601,
+            "support": 247257,
+            "reliable_evaluation": true
+          },
+          "Reconnaissance": {
+            "precision": 0.9997804610318332,
+            "recall": 1.0,
+            "f1_score": 0.9998902184652542,
+            "support": 13662,
+            "reliable_evaluation": true
+          },
+          "Theft": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1_score": 1.0,
+            "support": 12,
+            "reliable_evaluation": false
+          }
+        },
+        "underrepresented_classes_flags": {
+          "Theft": "Support of 12 samples is below the reliability threshold (50)."
+        },
+        "confusion_matrix": {
+          "labels": [
+            "DDoS",
+            "DoS",
+            "Reconnaissance",
+            "Theft"
+          ],
+          "matrix": [
+            [
+              289128,
+              146,
+              1,
+              0
+            ],
+            [
+              18,
+              247237,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              13662,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              12
+            ]
+          ]
+        },
+        "classification_report": {
+          "DDoS": {
+            "precision": 0.9999377477122284,
+            "recall": 0.999491833030853,
+            "f1-score": 0.9997147406473831,
+            "support": 289275.0
+          },
+          "DoS": {
+            "precision": 0.9994098220168727,
+            "recall": 0.9999191125023761,
+            "f1-score": 0.9996644023936601,
+            "support": 247257.0
+          },
+          "Reconnaissance": {
+            "precision": 0.9997804610318332,
+            "recall": 1.0,
+            "f1-score": 0.9998902184652542,
+            "support": 13662.0
+          },
+          "Theft": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 12.0
+          },
+          "accuracy": 0.999696477319404,
+          "macro avg": {
+            "precision": 0.9997820076902335,
+            "recall": 0.9998527363833073,
+            "f1-score": 0.9998173403765743,
+            "support": 550206.0
+          },
+          "weighted avg": {
+            "precision": 0.9996965990747059,
+            "recall": 0.999696477319404,
+            "f1-score": 0.9996964826048664,
+            "support": 550206.0
+          }
+        }
+      },
+      "feature_importances": {
+        "N_IN_Conn_P_DstIP": 0.1819480061531067,
+        "TnP_Per_Dport": 0.1265263557434082,
+        "dur": 0.12386976182460785,
+        "N_IN_Conn_P_SrcIP": 0.07491661608219147,
+        "dpkts": 0.06739427149295807,
+        "stddev": 0.06288748234510422,
+        "state_INT": 0.06267599016427994,
+        "state_REQ": 0.04156536981463432,
+        "TnP_PerProto": 0.03800595924258232,
+        "rate": 0.036872196942567825,
+        "TnBPDstIP": 0.02781290002167225,
+        "TnP_PDstIP": 0.02612379752099514,
+        "flgs_e": 0.021346919238567352,
+        "spkts": 0.01682882197201252,
+        "dport": 0.01556489523500204,
+        "proto_tcp": 0.013535049743950367,
+        "proto_udp": 0.010771360248327255,
+        "state_RST": 0.009964307770133018,
+        "TnBPSrcIP": 0.008852862752974033,
+        "pkts": 0.006632484961301088,
+        "TnP_PSrcIP": 0.004847358446568251,
+        "sport": 0.004189916420727968,
+        "mean": 0.003530746791511774,
+        "min": 0.003186068730428815,
+        "state_FIN": 0.002319895662367344,
+        "flgs_e s": 0.0016882686177268624,
+        "state_ACC": 0.0014739929465577006,
+        "Pkts_P_State_P_Protocol_P_SrcIP": 0.0014636050909757614,
+        "flgs_e g": 0.00116617395542562,
+        "proto_arp": 0.0009480519802309573,
+        "state_CON": 0.00025989324785768986,
+        "flgs_eU": 0.00024923906312324107,
+        "state_URP": 0.00023511823383159935,
+        "flgs_e d": 0.0001695724786259234,
+        "proto_icmp": 0.00014209450455382466,
+        "state_ECO": 3.458710853010416e-05,
+        "flgs_e   t": 0.0,
+        "flgs_e  D": 0.0,
+        "flgs_e *": 0.0,
+        "state_MAS": 0.0,
+        "state_TST": 0.0
+      }
+    },
+    "ros": {
+      "strategy": "ros",
+      "description": "Random Over-Sampling (ROS) category dataset (Normal excluded)",
+      "training_samples": 2572576,
+      "training_counts": {
+        "DDoS": 1348005,
+        "DoS": 1155814,
+        "Reconnaissance": 63757,
+        "Theft": 5000
+      },
+      "hyperparameters": {
+        "n_estimators": 100,
+        "max_depth": 6,
+        "learning_rate": 0.1,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": -1,
+        "objective": "multi:softprob",
+        "num_class": 4,
+        "eval_metric": "mlogloss"
+      },
+      "used_sample_weight": false,
+      "training_time_seconds": 38.62,
+      "evaluation_time_seconds": 0.37,
+      "model_path": "models\\xgb_category_ros_pipeline.joblib",
+      "metrics": {
+        "overall_accuracy": 0.9997873523734747,
+        "precision_macro": 0.9806380560396324,
+        "recall_macro": 0.9998953604035519,
+        "f1_macro": 0.9898820841174809,
+        "precision_weighted": 0.9997875281693305,
+        "recall_weighted": 0.9997873523734747,
+        "f1_weighted": 0.9997873904943168,
+        "per_class_metrics": {
+          "DDoS": {
+            "precision": 0.9999204716377657,
+            "recall": 0.9996785066113559,
+            "f1_score": 0.9997994744848568,
+            "support": 289275,
+            "reliable_evaluation": true
+          },
+          "DoS": {
+            "precision": 0.9996280198119882,
+            "recall": 0.9999029350028513,
+            "f1_score": 0.999765458508397,
+            "support": 247257,
+            "reliable_evaluation": true
+          },
+          "Reconnaissance": {
+            "precision": 0.9999268096318524,
+            "recall": 1.0,
+            "f1_score": 0.9999634034766697,
+            "support": 13662,
+            "reliable_evaluation": true
+          },
+          "Theft": {
+            "precision": 0.9230769230769231,
+            "recall": 1.0,
+            "f1_score": 0.96,
+            "support": 12,
+            "reliable_evaluation": false
+          }
+        },
+        "underrepresented_classes_flags": {
+          "Theft": "Support of 12 samples is below the reliability threshold (50)."
+        },
+        "confusion_matrix": {
+          "labels": [
+            "DDoS",
+            "DoS",
+            "Reconnaissance",
+            "Theft"
+          ],
+          "matrix": [
+            [
+              289182,
+              92,
+              1,
+              0
+            ],
+            [
+              23,
+              247233,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              13662,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              12
+            ]
+          ]
+        },
+        "classification_report": {
+          "DDoS": {
+            "precision": 0.9999204716377657,
+            "recall": 0.9996785066113559,
+            "f1-score": 0.9997994744848568,
+            "support": 289275.0
+          },
+          "DoS": {
+            "precision": 0.9996280198119882,
+            "recall": 0.9999029350028513,
+            "f1-score": 0.999765458508397,
+            "support": 247257.0
+          },
+          "Reconnaissance": {
+            "precision": 0.9999268096318524,
+            "recall": 1.0,
+            "f1-score": 0.9999634034766697,
+            "support": 13662.0
+          },
+          "Theft": {
+            "precision": 0.9230769230769231,
+            "recall": 1.0,
+            "f1-score": 0.96,
+            "support": 12.0
+          },
+          "accuracy": 0.9997873523734747,
+          "macro avg": {
+            "precision": 0.9806380560396324,
+            "recall": 0.9998953604035519,
+            "f1-score": 0.9898820841174809,
+            "support": 550206.0
+          },
+          "weighted avg": {
+            "precision": 0.9997875281693305,
+            "recall": 0.9997873523734747,
+            "f1-score": 0.9997873904943168,
+            "support": 550206.0
+          }
+        }
+      },
+      "feature_importances": {
+        "state_INT": 0.26300048828125,
+        "dur": 0.22719696164131165,
+        "rate": 0.06614218652248383,
+        "TnP_Per_Dport": 0.06069747358560562,
+        "dport": 0.045213278383016586,
+        "N_IN_Conn_P_DstIP": 0.0444960817694664,
+        "proto_udp": 0.03704122081398964,
+        "stddev": 0.035973042249679565,
+        "state_REQ": 0.028530079871416092,
+        "N_IN_Conn_P_SrcIP": 0.024857688695192337,
+        "proto_tcp": 0.022482428699731827,
+        "dpkts": 0.018855741247534752,
+        "pkts": 0.015203156508505344,
+        "spkts": 0.011971993371844292,
+        "TnP_PSrcIP": 0.011811903677880764,
+        "state_RST": 0.01043879147619009,
+        "Pkts_P_State_P_Protocol_P_SrcIP": 0.01026240736246109,
+        "TnBPSrcIP": 0.010159015655517578,
+        "TnBPDstIP": 0.00935288704931736,
+        "mean": 0.007422565016895533,
+        "flgs_e s": 0.007014547474682331,
+        "state_ACC": 0.006492736283689737,
+        "sport": 0.005357547663152218,
+        "TnP_PerProto": 0.004987052176147699,
+        "min": 0.004227141849696636,
+        "TnP_PDstIP": 0.003016526810824871,
+        "flgs_e g": 0.00230049854144454,
+        "state_FIN": 0.002211288083344698,
+        "flgs_e": 0.0014367542462423444,
+        "proto_icmp": 0.0006642962107434869,
+        "state_URP": 0.0003215236938558519,
+        "state_TST": 0.00018369762983638793,
+        "flgs_e d": 0.0001808587840059772,
+        "flgs_eU": 0.00016387857613153756,
+        "proto_arp": 0.00015180082118604332,
+        "state_MAS": 9.053496614797041e-05,
+        "state_CON": 8.995736425276846e-05,
+        "flgs_e   t": 0.0,
+        "flgs_e  D": 0.0,
+        "flgs_e *": 0.0,
+        "state_ECO": 0.0
+      }
+    },
+    "smote": {
+      "strategy": "smote",
+      "description": "SMOTENC synthetic oversampling category dataset (Normal excluded)",
+      "training_samples": 2572576,
+      "training_counts": {
+        "DDoS": 1348005,
+        "DoS": 1155814,
+        "Reconnaissance": 63757,
+        "Theft": 5000
+      },
+      "hyperparameters": {
+        "n_estimators": 100,
+        "max_depth": 6,
+        "learning_rate": 0.1,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": -1,
+        "objective": "multi:softprob",
+        "num_class": 4,
+        "eval_metric": "mlogloss"
+      },
+      "used_sample_weight": false,
+      "training_time_seconds": 39.07,
+      "evaluation_time_seconds": 0.35,
+      "model_path": "models\\xgb_category_smote_pipeline.joblib",
+      "metrics": {
+        "overall_accuracy": 0.9997655423604977,
+        "precision_macro": 0.9998555442335916,
+        "recall_macro": 0.9998852833774413,
+        "f1_macro": 0.9998704008649132,
+        "precision_weighted": 0.9997655961689574,
+        "recall_weighted": 0.9997655423604977,
+        "f1_weighted": 0.9997655449232875,
+        "per_class_metrics": {
+          "DDoS": {
+            "precision": 0.999923925446938,
+            "recall": 0.9996301097571515,
+            "f1_score": 0.9997769960153164,
+            "support": 289275,
+            "reliable_evaluation": true
+          },
+          "DoS": {
+            "precision": 0.9995714418555759,
+            "recall": 0.9999110237526136,
+            "f1_score": 0.9997412039676666,
+            "support": 247257,
+            "reliable_evaluation": true
+          },
+          "Reconnaissance": {
+            "precision": 0.9999268096318524,
+            "recall": 1.0,
+            "f1_score": 0.9999634034766697,
+            "support": 13662,
+            "reliable_evaluation": true
+          },
+          "Theft": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1_score": 1.0,
+            "support": 12,
+            "reliable_evaluation": false
+          }
+        },
+        "underrepresented_classes_flags": {
+          "Theft": "Support of 12 samples is below the reliability threshold (50)."
+        },
+        "confusion_matrix": {
+          "labels": [
+            "DDoS",
+            "DoS",
+            "Reconnaissance",
+            "Theft"
+          ],
+          "matrix": [
+            [
+              289168,
+              106,
+              1,
+              0
+            ],
+            [
+              22,
+              247235,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              13662,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              12
+            ]
+          ]
+        },
+        "classification_report": {
+          "DDoS": {
+            "precision": 0.999923925446938,
+            "recall": 0.9996301097571515,
+            "f1-score": 0.9997769960153164,
+            "support": 289275.0
+          },
+          "DoS": {
+            "precision": 0.9995714418555759,
+            "recall": 0.9999110237526136,
+            "f1-score": 0.9997412039676666,
+            "support": 247257.0
+          },
+          "Reconnaissance": {
+            "precision": 0.9999268096318524,
+            "recall": 1.0,
+            "f1-score": 0.9999634034766697,
+            "support": 13662.0
+          },
+          "Theft": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 12.0
+          },
+          "accuracy": 0.9997655423604977,
+          "macro avg": {
+            "precision": 0.9998555442335916,
+            "recall": 0.9998852833774413,
+            "f1-score": 0.9998704008649132,
+            "support": 550206.0
+          },
+          "weighted avg": {
+            "precision": 0.9997655961689574,
+            "recall": 0.9997655423604977,
+            "f1-score": 0.9997655449232875,
+            "support": 550206.0
+          }
+        }
+      },
+      "feature_importances": {
+        "dur": 0.2455342561006546,
+        "state_INT": 0.2447711080312729,
+        "rate": 0.0685211643576622,
+        "TnP_Per_Dport": 0.062402673065662384,
+        "N_IN_Conn_P_DstIP": 0.04536720737814903,
+        "stddev": 0.03914822265505791,
+        "dport": 0.03689549118280411,
+        "proto_udp": 0.03503376990556717,
+        "state_REQ": 0.03019297681748867,
+        "N_IN_Conn_P_SrcIP": 0.025393927469849586,
+        "dpkts": 0.020546674728393555,
+        "proto_tcp": 0.01859893649816513,
+        "pkts": 0.01452803984284401,
+        "spkts": 0.013802419416606426,
+        "TnP_PSrcIP": 0.012861134484410286,
+        "state_RST": 0.011303381994366646,
+        "TnBPDstIP": 0.010488850064575672,
+        "Pkts_P_State_P_Protocol_P_SrcIP": 0.009400333277881145,
+        "TnBPSrcIP": 0.00936631765216589,
+        "mean": 0.008467576466500759,
+        "flgs_e s": 0.007776596117764711,
+        "state_ACC": 0.00528864236548543,
+        "TnP_PerProto": 0.005168549716472626,
+        "sport": 0.0047867177054286,
+        "min": 0.004536705557256937,
+        "flgs_e g": 0.0026897075586020947,
+        "TnP_PDstIP": 0.0025445655919611454,
+        "state_FIN": 0.001995222410187125,
+        "flgs_e": 0.001650585443712771,
+        "flgs_eU": 0.00021410462795756757,
+        "proto_arp": 0.0002007826406043023,
+        "flgs_e d": 0.00016382038302253932,
+        "state_CON": 0.00014640162407886237,
+        "state_URP": 0.0001374063576804474,
+        "proto_icmp": 7.568785804323852e-05,
+        "flgs_e   t": 0.0,
+        "flgs_e  D": 0.0,
+        "flgs_e *": 0.0,
+        "state_ECO": 0.0,
+        "state_MAS": 0.0,
+        "state_TST": 0.0
+      }
+    }
+  }
+}

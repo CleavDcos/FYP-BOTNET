@@ -1,0 +1,175 @@
+{
+  "model_name": "XGBClassifier",
+  "stage": 5,
+  "task": "binary_detection",
+  "target_column": "attack",
+  "features": [
+    "proto",
+    "flgs",
+    "state",
+    "sport",
+    "dport",
+    "pkts",
+    "spkts",
+    "dpkts",
+    "dur",
+    "mean",
+    "stddev",
+    "min",
+    "rate",
+    "TnBPSrcIP",
+    "TnBPDstIP",
+    "TnP_PSrcIP",
+    "TnP_PDstIP",
+    "TnP_PerProto",
+    "TnP_Per_Dport",
+    "N_IN_Conn_P_DstIP",
+    "N_IN_Conn_P_SrcIP",
+    "Pkts_P_State_P_Protocol_P_SrcIP"
+  ],
+  "feature_count": 22,
+  "train_dataset": "botnet_train_v2_clean.parquet",
+  "val_dataset": "botnet_val_v2_clean.parquet",
+  "train_samples": 2567965,
+  "val_samples": 550278,
+  "train_class_counts": {
+    "1": 2567631,
+    "0": 334
+  },
+  "val_class_counts": {
+    "1": 550206,
+    "0": 72
+  },
+  "model_hyperparameters": {
+    "n_estimators": 100,
+    "max_depth": 6,
+    "learning_rate": 0.1,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "tree_method": "hist",
+    "random_state": 42,
+    "n_jobs": -1,
+    "eval_metric": "logloss"
+  },
+  "training_time_seconds": 13.54,
+  "validation_evaluation_time_seconds": 1.98,
+  "model_save_path": "models\\xgb_binary_pipeline.joblib",
+  "metrics": {
+    "accuracy": 0.9999890964203548,
+    "precision_macro": 0.9791639404150445,
+    "recall_macro": 0.9791639404150445,
+    "f1_macro": 0.9791639404150445,
+    "precision_weighted": 0.9999890964203548,
+    "recall_weighted": 0.9999890964203548,
+    "f1_weighted": 0.9999890964203548,
+    "normal_class_metrics": {
+      "precision": 0.9583333333333334,
+      "recall": 0.9583333333333334,
+      "f1_score": 0.9583333333333334,
+      "support": 72,
+      "pr_auc": 0.9979505310649415
+    },
+    "attack_class_metrics": {
+      "precision": 0.9999945474967558,
+      "recall": 0.9999945474967558,
+      "f1_score": 0.9999945474967558,
+      "support": 550206,
+      "pr_auc": 0.9999999999636636
+    },
+    "confusion_matrix": {
+      "true_negatives_normal": 69,
+      "false_positives_normal_flagged_as_attack": 3,
+      "false_negatives_attack_missed": 3,
+      "true_positives_attack_detected": 550203,
+      "matrix_format": [
+        [
+          69,
+          3
+        ],
+        [
+          3,
+          550203
+        ]
+      ],
+      "labels_order": [
+        "Normal (0)",
+        "Attack (1)"
+      ]
+    },
+    "false_positive_rate": 0.041666666666666664,
+    "roc_auc": 0.9999997223262237,
+    "classification_report": {
+      "Normal (0)": {
+        "precision": 0.9583333333333334,
+        "recall": 0.9583333333333334,
+        "f1-score": 0.9583333333333334,
+        "support": 72.0
+      },
+      "Attack (1)": {
+        "precision": 0.9999945474967558,
+        "recall": 0.9999945474967558,
+        "f1-score": 0.9999945474967558,
+        "support": 550206.0
+      },
+      "accuracy": 0.9999890964203548,
+      "macro avg": {
+        "precision": 0.9791639404150445,
+        "recall": 0.9791639404150445,
+        "f1-score": 0.9791639404150445,
+        "support": 550278.0
+      },
+      "weighted avg": {
+        "precision": 0.9999890964203548,
+        "recall": 0.9999890964203548,
+        "f1-score": 0.9999890964203548,
+        "support": 550278.0
+      }
+    }
+  },
+  "feature_importances": {
+    "TnP_PDstIP": 0.8029117584228516,
+    "TnBPSrcIP": 0.06529507786035538,
+    "TnP_PerProto": 0.026792343705892563,
+    "state_CON": 0.0193545650690794,
+    "N_IN_Conn_P_DstIP": 0.01100495271384716,
+    "proto_udp": 0.008194275200366974,
+    "stddev": 0.007433529477566481,
+    "proto_arp": 0.007374518550932407,
+    "TnBPDstIP": 0.006886187940835953,
+    "proto_ipv6-icmp": 0.006466872524470091,
+    "state_NRS": 0.006116586737334728,
+    "dur": 0.005868757143616676,
+    "Pkts_P_State_P_Protocol_P_SrcIP": 0.003839614102616906,
+    "dport": 0.003603661432862282,
+    "pkts": 0.003113463753834367,
+    "N_IN_Conn_P_SrcIP": 0.0027043723966926336,
+    "proto_icmp": 0.0026341371703892946,
+    "spkts": 0.0024388963356614113,
+    "min": 0.001500916201621294,
+    "mean": 0.0014362523797899485,
+    "TnP_Per_Dport": 0.0011465067509561777,
+    "TnP_PSrcIP": 0.0010552355088293552,
+    "sport": 0.0009061408927664161,
+    "dpkts": 0.0007452800637111068,
+    "rate": 0.0006389915943145752,
+    "proto_tcp": 0.0005371285951696336,
+    "flgs_e": 0.0,
+    "flgs_e   t": 0.0,
+    "flgs_e  D": 0.0,
+    "flgs_e &": 0.0,
+    "flgs_e *": 0.0,
+    "flgs_e d": 0.0,
+    "flgs_e g": 0.0,
+    "flgs_e s": 0.0,
+    "flgs_eU": 0.0,
+    "state_ACC": 0.0,
+    "state_ECO": 0.0,
+    "state_FIN": 0.0,
+    "state_INT": 0.0,
+    "state_MAS": 0.0,
+    "state_REQ": 0.0,
+    "state_RST": 0.0,
+    "state_TST": 0.0,
+    "state_URP": 0.0
+  }
+}
