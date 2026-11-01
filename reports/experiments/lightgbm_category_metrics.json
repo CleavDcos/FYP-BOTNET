@@ -1,0 +1,128 @@
+{
+  "model": "LightGBM",
+  "target": "category",
+  "training_data": "C:\\Users\\Aidan\\Desktop\\Aidan\\Final Year Project\\Git Repo\\FYP-BOTNET\\data\\processed\\botnet_train_v2_ros_category.parquet",
+  "training_rows": 2582576,
+  "validation_rows": 550278,
+  "features": [
+    "proto",
+    "flgs",
+    "state",
+    "sport",
+    "dport",
+    "pkts",
+    "spkts",
+    "dpkts",
+    "dur",
+    "mean",
+    "stddev",
+    "min",
+    "rate",
+    "TnBPSrcIP",
+    "TnBPDstIP",
+    "TnP_PSrcIP",
+    "TnP_PDstIP",
+    "TnP_PerProto",
+    "TnP_Per_Dport",
+    "N_IN_Conn_P_DstIP",
+    "N_IN_Conn_P_SrcIP",
+    "Pkts_P_State_P_Protocol_P_SrcIP"
+  ],
+  "n_estimators": 300,
+  "learning_rate": 0.05,
+  "num_leaves": 31,
+  "class_weight": "balanced",
+  "accuracy": 0.9999745583141612,
+  "balanced_accuracy": 0.9999900856464695,
+  "macro_f1": 0.9999756102556606,
+  "weighted_f1": 0.9999745584375513,
+  "labels": [
+    "DDoS",
+    "DoS",
+    "Normal",
+    "Reconnaissance",
+    "Theft"
+  ],
+  "confusion_matrix": [
+    [
+      289263,
+      11,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      247255,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      72,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      13662,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      12
+    ]
+  ],
+  "classification_report": {
+    "DDoS": {
+      "precision": 0.9999965429503844,
+      "recall": 0.9999585169821105,
+      "f1-score": 0.9999775296047457,
+      "support": 289275.0
+    },
+    "DoS": {
+      "precision": 0.9999555134955878,
+      "recall": 0.9999919112502376,
+      "f1-score": 0.9999737120417048,
+      "support": 247257.0
+    },
+    "Normal": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 72.0
+    },
+    "Reconnaissance": {
+      "precision": 0.9998536299765808,
+      "recall": 1.0,
+      "f1-score": 0.9999268096318524,
+      "support": 13662.0
+    },
+    "Theft": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 12.0
+    },
+    "accuracy": 0.9999745583141612,
+    "macro avg": {
+      "precision": 0.9999611372845105,
+      "recall": 0.9999900856464695,
+      "f1-score": 0.9999756102556606,
+      "support": 550278.0
+    },
+    "weighted avg": {
+      "precision": 0.9999745595046343,
+      "recall": 0.9999745583141612,
+      "f1-score": 0.9999745584375513,
+      "support": 550278.0
+    }
+  }
+}

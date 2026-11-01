@@ -1,0 +1,182 @@
+{
+  "model": "decision_tree",
+  "target": "category",
+  "evaluation_split": "C:\\Users\\Aidan\\Desktop\\Aidan\\Final Year Project\\Git Repo\\FYP-BOTNET\\data\\processed\\botnet_test_v2_clean.parquet",
+  "test_rows": 550279,
+  "features": [
+    "proto",
+    "flgs",
+    "state",
+    "sport",
+    "dport",
+    "pkts",
+    "spkts",
+    "dpkts",
+    "dur",
+    "mean",
+    "stddev",
+    "min",
+    "rate",
+    "TnBPSrcIP",
+    "TnBPDstIP",
+    "TnP_PSrcIP",
+    "TnP_PDstIP",
+    "TnP_PerProto",
+    "TnP_Per_Dport",
+    "N_IN_Conn_P_DstIP",
+    "N_IN_Conn_P_SrcIP",
+    "Pkts_P_State_P_Protocol_P_SrcIP"
+  ],
+  "labels": [
+    "DDoS",
+    "DoS",
+    "Normal",
+    "Reconnaissance",
+    "Theft"
+  ],
+  "overall": {
+    "accuracy": 0.9998037359230499,
+    "balanced_accuracy": 0.9941930603147873,
+    "precision_macro": 0.9655185494013144,
+    "precision_weighted": 0.9998042968663609,
+    "recall_macro": 0.9941930603147873,
+    "recall_weighted": 0.9998037359230499,
+    "f1_macro": 0.9787568850426588,
+    "f1_weighted": 0.9998038812921419,
+    "f1_micro": 0.9998037359230499,
+    "matthews_correlation_coefficient": 0.9996234165463126,
+    "cohen_kappa": 0.9996233902072738,
+    "log_loss": 0.0018910238570739068,
+    "roc_auc_ovr_macro": 0.9971288973280528,
+    "roc_auc_ovr_weighted": 0.9999700901567706,
+    "average_precision_macro": 0.9628095946473845,
+    "average_precision_weighted": 0.9999398288087453
+  },
+  "per_class_roc_auc_ovr": {
+    "DDoS": 0.9999793927022333,
+    "DoS": 0.999973823838158,
+    "Normal": 0.9859145330134816,
+    "Reconnaissance": 0.9997785543859926,
+    "Theft": 0.9999981827003982
+  },
+  "per_class_average_precision": {
+    "DDoS": 0.999967508461549,
+    "DoS": 0.999954983366081,
+    "Normal": 0.9575574900064039,
+    "Reconnaissance": 0.9994251342600315,
+    "Theft": 0.8571428571428571
+  },
+  "per_class": {
+    "DDoS": {
+      "precision": 0.9999585171255133,
+      "recall_sensitivity": 0.9997235124972351,
+      "f1_score": 0.9998410010023849,
+      "specificity": 0.9999540115354398,
+      "false_positive_rate": 4.598846456016492e-05,
+      "false_negative_rate": 0.0002764875027648772,
+      "support": 289344,
+      "true_positive": 289264,
+      "false_positive": 12,
+      "true_negative": 260923,
+      "false_negative": 80
+    },
+    "DoS": {
+      "precision": 0.999684527276257,
+      "recall_sensitivity": 0.9999231357382408,
+      "f1_score": 0.9998038172709567,
+      "specificity": 0.9997426506978125,
+      "false_positive_rate": 0.00025734930218745955,
+      "false_negative_rate": 7.686426175923522e-05,
+      "support": 247189,
+      "true_positive": 247170,
+      "false_positive": 78,
+      "true_negative": 303012,
+      "false_negative": 19
+    },
+    "Normal": {
+      "precision": 0.971830985915493,
+      "recall_sensitivity": 0.971830985915493,
+      "f1_score": 0.971830985915493,
+      "specificity": 0.9999963650110504,
+      "false_positive_rate": 3.634988949619e-06,
+      "false_negative_rate": 0.028169014084507005,
+      "support": 71,
+      "true_positive": 69,
+      "false_positive": 2,
+      "true_negative": 550206,
+      "false_negative": 2
+    },
+    "Reconnaissance": {
+      "precision": 0.9989758595464521,
+      "recall_sensitivity": 0.9994876674229671,
+      "f1_score": 0.999231697947536,
+      "specificity": 0.9999739105803778,
+      "false_positive_rate": 2.6089419622232768e-05,
+      "false_negative_rate": 0.0005123325770328702,
+      "support": 13663,
+      "true_positive": 13656,
+      "false_positive": 14,
+      "true_negative": 536602,
+      "false_negative": 7
+    },
+    "Theft": {
+      "precision": 0.8571428571428571,
+      "recall_sensitivity": 1.0,
+      "f1_score": 0.9230769230769231,
+      "specificity": 0.9999963654007964,
+      "false_positive_rate": 3.6345992036057595e-06,
+      "false_negative_rate": 0.0,
+      "support": 12,
+      "true_positive": 12,
+      "false_positive": 2,
+      "true_negative": 550265,
+      "false_negative": 0
+    }
+  },
+  "confusion_matrix": {
+    "labels_in_order": [
+      "DDoS",
+      "DoS",
+      "Normal",
+      "Reconnaissance",
+      "Theft"
+    ],
+    "rows_actual_columns_predicted": [
+      [
+        289264,
+        74,
+        0,
+        6,
+        0
+      ],
+      [
+        10,
+        247170,
+        0,
+        8,
+        1
+      ],
+      [
+        0,
+        2,
+        69,
+        0,
+        0
+      ],
+      [
+        2,
+        2,
+        2,
+        13656,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        12
+      ]
+    ]
+  }
+}

@@ -99,6 +99,9 @@ def run_clean_pipeline():
     print("Starting Preprocessing Pipeline...")
     start_time = time.time()
 
+    # The repository may not contain data/processed until the first run.
+    PREPROCESSED_PARQUET.parent.mkdir(parents=True, exist_ok=True)
+
     first_csv = RAW_CSV_FILES[0]
     all_raw_cols = pd.read_csv(first_csv, nrows=1).columns.tolist()
 

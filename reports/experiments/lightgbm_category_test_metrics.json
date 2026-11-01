@@ -1,0 +1,182 @@
+{
+  "model": "lightgbm",
+  "target": "category",
+  "evaluation_split": "C:\\Users\\Aidan\\Desktop\\Aidan\\Final Year Project\\Git Repo\\FYP-BOTNET\\data\\processed\\botnet_test_v2_clean.parquet",
+  "test_rows": 550279,
+  "features": [
+    "proto",
+    "flgs",
+    "state",
+    "sport",
+    "dport",
+    "pkts",
+    "spkts",
+    "dpkts",
+    "dur",
+    "mean",
+    "stddev",
+    "min",
+    "rate",
+    "TnBPSrcIP",
+    "TnBPDstIP",
+    "TnP_PSrcIP",
+    "TnP_PDstIP",
+    "TnP_PerProto",
+    "TnP_Per_Dport",
+    "N_IN_Conn_P_DstIP",
+    "N_IN_Conn_P_SrcIP",
+    "Pkts_P_State_P_Protocol_P_SrcIP"
+  ],
+  "labels": [
+    "DDoS",
+    "DoS",
+    "Normal",
+    "Reconnaissance",
+    "Theft"
+  ],
+  "overall": {
+    "accuracy": 0.999985461920226,
+    "balanced_accuracy": 0.9999662229039936,
+    "precision_macro": 0.9818050943134718,
+    "precision_weighted": 0.9999856269785828,
+    "recall_macro": 0.9999662229039936,
+    "recall_weighted": 0.999985461920226,
+    "f1_macro": 0.9905682537851345,
+    "f1_weighted": 0.9999855046182152,
+    "f1_micro": 0.999985461920226,
+    "matthews_correlation_coefficient": 0.9999721022506575,
+    "cohen_kappa": 0.9999721022048981,
+    "log_loss": 6.615840718628618e-05,
+    "roc_auc_ovr_macro": 0.9999999937685565,
+    "roc_auc_ovr_weighted": 0.9999999979246957,
+    "average_precision_macro": 0.9999608665592141,
+    "average_precision_weighted": 0.99999997084519
+  },
+  "per_class_roc_auc_ovr": {
+    "DDoS": 0.9999999995033111,
+    "DoS": 0.9999999960291249,
+    "Normal": 0.9999999744014862,
+    "Reconnaissance": 0.9999999989088604,
+    "Theft": 1.0
+  },
+  "per_class_average_precision": {
+    "DDoS": 0.9999999991758892,
+    "DoS": 0.9999999946172111,
+    "Normal": 0.9998043818466353,
+    "Reconnaissance": 0.9999999571563352,
+    "Theft": 1.0
+  },
+  "per_class": {
+    "DDoS": {
+      "precision": 1.0,
+      "recall_sensitivity": 0.9999896317186463,
+      "f1_score": 0.9999948158324478,
+      "specificity": 1.0,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 1.0368281353700937e-05,
+      "support": 289344,
+      "true_positive": 289341,
+      "false_positive": 0,
+      "true_negative": 260935,
+      "false_negative": 3
+    },
+    "DoS": {
+      "precision": 0.9999838181156195,
+      "recall_sensitivity": 0.9999878635376169,
+      "f1_score": 0.9999858408225268,
+      "specificity": 0.9999868025998878,
+      "false_positive_rate": 1.3197400112185953e-05,
+      "false_negative_rate": 1.21364623830722e-05,
+      "support": 247189,
+      "true_positive": 247186,
+      "false_positive": 4,
+      "true_negative": 303086,
+      "false_negative": 3
+    },
+    "Normal": {
+      "precision": 0.9861111111111112,
+      "recall_sensitivity": 1.0,
+      "f1_score": 0.993006993006993,
+      "specificity": 0.9999981825055252,
+      "false_positive_rate": 1.8174944748095e-06,
+      "false_negative_rate": 0.0,
+      "support": 71,
+      "true_positive": 71,
+      "false_positive": 1,
+      "true_negative": 550207,
+      "false_negative": 0
+    },
+    "Reconnaissance": {
+      "precision": 0.9998536192637049,
+      "recall_sensitivity": 0.9998536192637049,
+      "f1_score": 0.9998536192637049,
+      "specificity": 0.999996272940054,
+      "false_positive_rate": 3.727059946001532e-06,
+      "false_negative_rate": 0.00014638073629513748,
+      "support": 13663,
+      "true_positive": 13661,
+      "false_positive": 2,
+      "true_negative": 536614,
+      "false_negative": 2
+    },
+    "Theft": {
+      "precision": 0.9230769230769231,
+      "recall_sensitivity": 1.0,
+      "f1_score": 0.96,
+      "specificity": 0.9999981827003982,
+      "false_positive_rate": 1.8172996018028797e-06,
+      "false_negative_rate": 0.0,
+      "support": 12,
+      "true_positive": 12,
+      "false_positive": 1,
+      "true_negative": 550266,
+      "false_negative": 0
+    }
+  },
+  "confusion_matrix": {
+    "labels_in_order": [
+      "DDoS",
+      "DoS",
+      "Normal",
+      "Reconnaissance",
+      "Theft"
+    ],
+    "rows_actual_columns_predicted": [
+      [
+        289341,
+        3,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        247186,
+        0,
+        2,
+        1
+      ],
+      [
+        0,
+        0,
+        71,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        1,
+        13661,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        12
+      ]
+    ]
+  }
+}

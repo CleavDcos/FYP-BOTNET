@@ -1,0 +1,126 @@
+{
+  "target": "category",
+  "training_data": "C:\\Users\\Aidan\\Desktop\\Aidan\\Final Year Project\\Git Repo\\FYP-BOTNET\\data\\processed\\botnet_train_v2_ros_category.parquet",
+  "training_rows": 2582576,
+  "validation_rows": 550278,
+  "features": [
+    "proto",
+    "flgs",
+    "state",
+    "sport",
+    "dport",
+    "pkts",
+    "spkts",
+    "dpkts",
+    "dur",
+    "mean",
+    "stddev",
+    "min",
+    "rate",
+    "TnBPSrcIP",
+    "TnBPDstIP",
+    "TnP_PSrcIP",
+    "TnP_PDstIP",
+    "TnP_PerProto",
+    "TnP_Per_Dport",
+    "N_IN_Conn_P_DstIP",
+    "N_IN_Conn_P_SrcIP",
+    "Pkts_P_State_P_Protocol_P_SrcIP"
+  ],
+  "max_depth": 20,
+  "min_samples_leaf": 5,
+  "class_weight": "balanced",
+  "accuracy": 0.9998291772522252,
+  "balanced_accuracy": 0.9999044121148255,
+  "macro_f1": 0.9998601180226083,
+  "weighted_f1": 0.9998291792523024,
+  "labels": [
+    "DDoS",
+    "DoS",
+    "Normal",
+    "Reconnaissance",
+    "Theft"
+  ],
+  "confusion_matrix": [
+    [
+      289206,
+      64,
+      0,
+      5,
+      0
+    ],
+    [
+      20,
+      247234,
+      0,
+      3,
+      0
+    ],
+    [
+      0,
+      0,
+      72,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      13660,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      12
+    ]
+  ],
+  "classification_report": {
+    "DDoS": {
+      "precision": 0.9999273926708088,
+      "recall": 0.9997614726471351,
+      "f1-score": 0.9998444257755376,
+      "support": 289275.0
+    },
+    "DoS": {
+      "precision": 0.9997371602796614,
+      "recall": 0.9999069793777324,
+      "f1-score": 0.9998220626177824,
+      "support": 247257.0
+    },
+    "Normal": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 72.0
+    },
+    "Reconnaissance": {
+      "precision": 0.9994146912496342,
+      "recall": 0.9998536085492608,
+      "f1-score": 0.9996341017197219,
+      "support": 13662.0
+    },
+    "Theft": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 12.0
+    },
+    "accuracy": 0.9998291772522252,
+    "macro avg": {
+      "precision": 0.999815848840021,
+      "recall": 0.9999044121148255,
+      "f1-score": 0.9998601180226083,
+      "support": 550278.0
+    },
+    "weighted avg": {
+      "precision": 0.9998291973620042,
+      "recall": 0.9998291772522252,
+      "f1-score": 0.9998291792523024,
+      "support": 550278.0
+    }
+  }
+}

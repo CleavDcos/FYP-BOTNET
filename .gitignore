@@ -45,7 +45,7 @@ data/processed/*.csv
 !reports/preprocessing/*.csv
 
 # Trained Model Binaries & Checkpoints
-models/
+/models/
 *.pkl
 *.joblib
 *.onnx
