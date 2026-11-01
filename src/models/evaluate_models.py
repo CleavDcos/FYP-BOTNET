@@ -27,18 +27,20 @@ from config.settings import (
     PROJECT_ROOT,
     TEST_V2_CLEAN_PARQUET,
 )
+from src.models.cnn_utils import CNNCategoryPredictor
 
 MODEL_PATHS = {
     "decision_tree": PROJECT_ROOT / "models" / "decision_tree_category.joblib",
     "lightgbm": PROJECT_ROOT / "models" / "lightgbm_category.joblib",
+    "cnn": PROJECT_ROOT / "models" / "cnn_category.keras",
 }
 
 
 def evaluate_model(name: str, model, X: pd.DataFrame, y_true: pd.Series) -> dict:
     """Compute threshold and probability metrics for one fitted classifier."""
-    y_pred = model.predict(X)
     y_proba = model.predict_proba(X)
     labels = model.classes_.tolist()
+    y_pred = np.asarray(labels)[np.argmax(y_proba, axis=1)]
     y_true_binarized = label_binarize(y_true, classes=labels)
     matrix = confusion_matrix(y_true, y_pred, labels=labels)
     precision, recall, f1, support = precision_recall_fscore_support(
@@ -126,12 +128,20 @@ def main() -> None:
         "--models",
         nargs="+",
         choices=tuple(MODEL_PATHS),
-        default=list(MODEL_PATHS),
-        help="Models to evaluate (default: both).",
+        default=["decision_tree", "lightgbm"],
+        help="Models to evaluate (default: decision_tree and lightgbm).",
     )
     args = parser.parse_args()
 
-    missing = [str(MODEL_PATHS[name]) for name in args.models if not MODEL_PATHS[name].is_file()]
+    missing = [
+        str(MODEL_PATHS[name])
+        for name in args.models
+        if not MODEL_PATHS[name].is_file()
+    ]
+    if "cnn" in args.models:
+        cnn_preprocessors = PROJECT_ROOT / "models" / "cnn_category_preprocessors.joblib"
+        if not cnn_preprocessors.is_file():
+            missing.append(str(cnn_preprocessors))
     if missing:
         parser.error("Missing trained model file(s): " + ", ".join(missing))
     if not TEST_V2_CLEAN_PARQUET.is_file():
@@ -148,7 +158,19 @@ def main() -> None:
 
     for name in args.models:
         print(f"Evaluating {name} on {len(test):,} test rows...", flush=True)
-        model = joblib.load(MODEL_PATHS[name])
+        if name == "cnn":
+            import tensorflow as tf
+
+            network = tf.keras.models.load_model(MODEL_PATHS[name])
+            preprocessors = joblib.load(cnn_preprocessors)
+            model = CNNCategoryPredictor(
+                network,
+                preprocessors["numeric_transformer"],
+                preprocessors["categorical_encoder"],
+                preprocessors["label_encoder"],
+            )
+        else:
+            model = joblib.load(MODEL_PATHS[name])
         metrics = evaluate_model(name, model, X_test, y_test)
         report_path = report_dir / f"{name}_category_test_metrics.json"
         report_path.write_text(json.dumps(metrics, indent=2), encoding="utf-8")
