@@ -1,0 +1,138 @@
+{
+  "model": "Normal-only bottleneck autoencoder",
+  "task": "binary_anomaly_detection",
+  "target": "attack",
+  "training_dataset": "botnet_train_v2_clean.parquet",
+  "validation_dataset": "botnet_val_v2_clean.parquet",
+  "features": [
+    "proto",
+    "flgs",
+    "state",
+    "sport",
+    "dport",
+    "pkts",
+    "spkts",
+    "dpkts",
+    "dur",
+    "mean",
+    "stddev",
+    "min",
+    "rate",
+    "TnBPSrcIP",
+    "TnBPDstIP",
+    "TnP_PSrcIP",
+    "TnP_PDstIP",
+    "TnP_PerProto",
+    "TnP_Per_Dport",
+    "N_IN_Conn_P_DstIP",
+    "N_IN_Conn_P_SrcIP",
+    "Pkts_P_State_P_Protocol_P_SrcIP"
+  ],
+  "feature_count": 22,
+  "seed": 42,
+  "training_strategy": "Fit on every Normal (attack=0) row in the training split. Attacks are not used to fit the reconstruction model.",
+  "normal_training_rows": 334,
+  "validation_rows": 550278,
+  "validation_class_counts": {
+    "1": 550206,
+    "0": 72
+  },
+  "preprocessing": "One-hot categorical encoding and numeric standardization fitted on Normal training rows only.",
+  "architecture": {
+    "input_features_after_encoding": 31,
+    "hidden_layers": [
+      16,
+      8,
+      16
+    ],
+    "bottleneck_width": 8,
+    "activation": "relu",
+    "optimizer": "adam",
+    "loss": "mean squared reconstruction error",
+    "l2_alpha": 0.05,
+    "denoising_input_noise_standard_deviation": 0.1
+  },
+  "overfitting_controls": {
+    "early_stopping_signal": "validation Normal reconstruction MSE",
+    "best_epoch": 300,
+    "epochs_completed": 300,
+    "maximum_epochs": 300,
+    "patience": 20,
+    "best_normal_validation_reconstruction_mse": 0.15121835470199585,
+    "maximum_epoch_limit_reached": true
+  },
+  "threshold_selection": {
+    "method": "Choose threshold that maximizes macro-F1 on the full validation split.",
+    "threshold": 0.05863950401544571,
+    "validation_macro_f1_at_threshold": 0.8760551995088361,
+    "validation_balanced_accuracy_at_threshold": 0.8055546468050149,
+    "alternative_balanced_accuracy_threshold": {
+      "threshold": 0.3770165741443634,
+      "validation_balanced_accuracy": 0.9740658498816808,
+      "validation_macro_f1": 0.5094268106348003
+    }
+  },
+  "training_time_seconds": 0.477,
+  "model_path": "models\\autoencoder_binary_full_data.joblib",
+  "test_split_used": false,
+  "metrics": {
+    "accuracy": 0.9999472993650482,
+    "balanced_accuracy": 0.8055546468050149,
+    "macro_f1": 0.8760551995088394,
+    "weighted_f1": 0.9999412191690763,
+    "normal_precision": 0.9777777777777777,
+    "normal_recall": 0.6111111111111112,
+    "attack_precision": 0.9999491124669004,
+    "attack_recall": 0.9999981824989186,
+    "false_positive_rate": 0.3888888888888889,
+    "roc_auc_from_reconstruction_error": 0.9958356758902828,
+    "average_precision_attack": 0.9999994389048622,
+    "confusion_matrix_labels_in_order": [
+      "Normal (0)",
+      "Attack (1)"
+    ],
+    "confusion_matrix_rows_actual_columns_predicted": [
+      [
+        44,
+        28
+      ],
+      [
+        1,
+        550205
+      ]
+    ],
+    "confusion_counts": {
+      "true_negatives": 44,
+      "false_positives": 28,
+      "false_negatives": 1,
+      "true_positives": 550205
+    },
+    "classification_report": {
+      "Normal": {
+        "precision": 0.9777777777777777,
+        "recall": 0.6111111111111112,
+        "f1-score": 0.7521367521367521,
+        "support": 72.0
+      },
+      "Attack": {
+        "precision": 0.9999491124669004,
+        "recall": 0.9999981824989186,
+        "f1-score": 0.9999736468809266,
+        "support": 550206.0
+      },
+      "accuracy": 0.9999472993650482,
+      "macro avg": {
+        "precision": 0.988863445122339,
+        "recall": 0.8055546468050149,
+        "f1-score": 0.8760551995088394,
+        "support": 550278.0
+      },
+      "weighted avg": {
+        "precision": 0.999946211503937,
+        "recall": 0.9999472993650482,
+        "f1-score": 0.9999412191690763,
+        "support": 550278.0
+      }
+    }
+  }
+}

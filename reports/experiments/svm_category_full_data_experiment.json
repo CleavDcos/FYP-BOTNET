@@ -1,0 +1,153 @@
+{
+  "model": "LinearSVC",
+  "task": "category",
+  "target": "category",
+  "training_dataset": "botnet_train_v2_clean.parquet",
+  "validation_dataset": "botnet_val_v2_clean.parquet",
+  "features": [
+    "proto",
+    "flgs",
+    "state",
+    "sport",
+    "dport",
+    "pkts",
+    "spkts",
+    "dpkts",
+    "dur",
+    "mean",
+    "stddev",
+    "min",
+    "rate",
+    "TnBPSrcIP",
+    "TnBPDstIP",
+    "TnP_PSrcIP",
+    "TnP_PDstIP",
+    "TnP_PerProto",
+    "TnP_Per_Dport",
+    "N_IN_Conn_P_DstIP",
+    "N_IN_Conn_P_SrcIP",
+    "Pkts_P_State_P_Protocol_P_SrcIP"
+  ],
+  "feature_count": 22,
+  "seed": 42,
+  "training_rows": 2567631,
+  "training_class_counts": {
+    "DDoS": 1348005,
+    "DoS": 1155814,
+    "Reconnaissance": 63757,
+    "Theft": 55
+  },
+  "sampling_or_resampling": "None. Every eligible training row is visited once in every completed epoch.",
+  "optimization_batch_size": 65536,
+  "validation_rows": 550206,
+  "validation_class_counts": {
+    "DDoS": 289275,
+    "DoS": 247257,
+    "Reconnaissance": 13662,
+    "Theft": 12
+  },
+  "class_weighting": "LinearSVC class_weight='balanced'.",
+  "early_stopping": {
+    "used": false,
+    "regularization": "L2 with C=0.1; solver stops by tolerance or max_iter.",
+    "iterations_used": 701,
+    "converged_within_iteration_limit": true
+  },
+  "hyperparameters": {
+    "C": 0.1,
+    "class_weight": "balanced",
+    "dual": "auto",
+    "fit_intercept": true,
+    "intercept_scaling": 1,
+    "loss": "squared_hinge",
+    "max_iter": 1000,
+    "multi_class": "ovr",
+    "penalty": "l2",
+    "random_state": 42,
+    "tol": 0.01,
+    "verbose": 0
+  },
+  "training_time_seconds": 327.271,
+  "validation_prediction_time_seconds": 51.077,
+  "model_path": "models\\svm_category_full_data.joblib",
+  "test_split_used": false,
+  "metrics": {
+    "accuracy": 0.9122292377763965,
+    "balanced_accuracy": 0.759578087240371,
+    "precision_macro": 0.7479073443594069,
+    "recall_macro": 0.759578087240371,
+    "f1_macro": 0.7528314192365423,
+    "f1_weighted": 0.9120504372566396,
+    "labels": [
+      "DDoS",
+      "DoS",
+      "Reconnaissance",
+      "Theft"
+    ],
+    "confusion_matrix": [
+      [
+        270953,
+        17937,
+        378,
+        7
+      ],
+      [
+        29494,
+        217689,
+        72,
+        2
+      ],
+      [
+        311,
+        79,
+        13269,
+        3
+      ],
+      [
+        0,
+        9,
+        0,
+        3
+      ]
+    ],
+    "classification_report": {
+      "DDoS": {
+        "precision": 0.9009003916770294,
+        "recall": 0.9366623455189699,
+        "f1-score": 0.9184333757603388,
+        "support": 289275.0
+      },
+      "DoS": {
+        "precision": 0.9235302103396489,
+        "recall": 0.8804159235127822,
+        "f1-score": 0.9014578515066122,
+        "support": 247257.0
+      },
+      "Reconnaissance": {
+        "precision": 0.967198775420949,
+        "recall": 0.9712340799297321,
+        "f1-score": 0.9692122274569958,
+        "support": 13662.0
+      },
+      "Theft": {
+        "precision": 0.2,
+        "recall": 0.25,
+        "f1-score": 0.2222222222222222,
+        "support": 12.0
+      },
+      "accuracy": 0.9122292377763965,
+      "macro avg": {
+        "precision": 0.7479073443594069,
+        "recall": 0.759578087240371,
+        "f1-score": 0.7528314192365423,
+        "support": 550206.0
+      },
+      "weighted avg": {
+        "precision": 0.912700951443867,
+        "recall": 0.9122292377763965,
+        "f1-score": 0.9120504372566396,
+        "support": 550206.0
+      }
+    }
+  }
+}

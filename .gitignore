@@ -46,6 +46,8 @@ data/processed/*.csv
 
 # Trained Model Binaries & Checkpoints
 models/
+!/src/models/
+!/src/models/*.py
 *.pkl
 *.joblib
 *.onnx
