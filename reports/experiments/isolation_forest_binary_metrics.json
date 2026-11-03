@@ -1,0 +1,87 @@
+{
+  "model": "Isolation Forest",
+  "target": "binary_normal_vs_attack",
+  "label_mapping": {
+    "Normal": 0,
+    "Attack": 1
+  },
+  "training_data": "C:\\Users\\Aidan\\Desktop\\Aidan\\Final Year Project\\Git Repo\\FYP-BOTNET\\data\\processed\\botnet_train_v2_clean.parquet",
+  "training_strategy": "fit on Normal records only; attack records excluded from fit",
+  "normal_training_rows": 334,
+  "validation_rows": 550278,
+  "features": [
+    "proto",
+    "flgs",
+    "state",
+    "sport",
+    "dport",
+    "pkts",
+    "spkts",
+    "dpkts",
+    "dur",
+    "mean",
+    "stddev",
+    "min",
+    "rate",
+    "TnBPSrcIP",
+    "TnBPDstIP",
+    "TnP_PSrcIP",
+    "TnP_PDstIP",
+    "TnP_PerProto",
+    "TnP_Per_Dport",
+    "N_IN_Conn_P_DstIP",
+    "N_IN_Conn_P_SrcIP",
+    "Pkts_P_State_P_Protocol_P_SrcIP"
+  ],
+  "n_estimators": 300,
+  "contamination": 0.05,
+  "accuracy": 0.2253660876865875,
+  "balanced_accuracy": 0.557084073965024,
+  "attack_precision": 0.9999354620113264,
+  "attack_recall": 0.22527925904115914,
+  "attack_f1": 0.36771468070083835,
+  "macro_f1": 0.1840074369751213,
+  "roc_auc_from_anomaly_score": 0.8767724169573659,
+  "average_precision_from_anomaly_score": 0.9999089732103728,
+  "confusion_matrix_labels_in_order": [
+    "Normal (0)",
+    "Attack (1)"
+  ],
+  "confusion_matrix_rows_actual_columns_predicted": [
+    [
+      64,
+      8
+    ],
+    [
+      426256,
+      123950
+    ]
+  ],
+  "classification_report": {
+    "Normal": {
+      "precision": 0.00015012197410395946,
+      "recall": 0.8888888888888888,
+      "f1-score": 0.00030019324940430404,
+      "support": 72.0
+    },
+    "Attack": {
+      "precision": 0.9999354620113264,
+      "recall": 0.22527925904115914,
+      "f1-score": 0.36771468070083835,
+      "support": 550206.0
+    },
+    "accuracy": 0.2253660876865875,
+    "macro avg": {
+      "precision": 0.5000427919927152,
+      "recall": 0.557084073965024,
+      "f1-score": 0.1840074369751213,
+      "support": 550278.0
+    },
+    "weighted avg": {
+      "precision": 0.9998046471423281,
+      "recall": 0.2253660876865875,
+      "f1-score": 0.36766660710331767,
+      "support": 550278.0
+    }
+  }
+}

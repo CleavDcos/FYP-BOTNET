@@ -33,6 +33,7 @@ MODEL_PATHS = {
     "decision_tree": PROJECT_ROOT / "models" / "decision_tree_category.joblib",
     "lightgbm": PROJECT_ROOT / "models" / "lightgbm_category.joblib",
     "cnn": PROJECT_ROOT / "models" / "cnn_category.keras",
+    "isolation_forest": PROJECT_ROOT / "models" / "isolation_forest_binary.joblib",
 }
 
 
@@ -120,6 +121,79 @@ def evaluate_model(name: str, model, X: pd.DataFrame, y_true: pd.Series) -> dict
     return metrics
 
 
+def evaluate_isolation_forest(model, X: pd.DataFrame, categories: pd.Series) -> dict:
+    """Evaluate Isolation Forest with Normal=0 and Attack=1 ground truth."""
+    y_true = categories.ne("Normal").astype(np.int8).to_numpy()
+    raw_predictions = model.predict(X)
+    y_pred = (raw_predictions == -1).astype(np.int8)
+    anomaly_scores = -model.decision_function(X)
+    labels = [0, 1]
+    matrix = confusion_matrix(y_true, y_pred, labels=labels)
+    precision, recall, f1, support = precision_recall_fscore_support(
+        y_true, y_pred, labels=labels, zero_division=0
+    )
+    total = int(matrix.sum())
+    per_class = {}
+    for index, class_name in enumerate(("Normal", "Attack")):
+        tp = int(matrix[index, index])
+        fn = int(matrix[index, :].sum() - tp)
+        fp = int(matrix[:, index].sum() - tp)
+        tn = total - tp - fn - fp
+        specificity = tn / (tn + fp) if tn + fp else 0.0
+        per_class[class_name] = {
+            "precision": float(precision[index]),
+            "recall_sensitivity": float(recall[index]),
+            "f1_score": float(f1[index]),
+            "specificity": float(specificity),
+            "false_positive_rate": float(1.0 - specificity),
+            "false_negative_rate": float(1.0 - recall[index]),
+            "support": int(support[index]),
+            "true_positive": tp,
+            "false_positive": fp,
+            "true_negative": tn,
+            "false_negative": fn,
+        }
+
+    roc_auc = float(roc_auc_score(y_true, anomaly_scores))
+    average_precision = float(average_precision_score(y_true, anomaly_scores))
+    overall = {
+        "accuracy": float(accuracy_score(y_true, y_pred)),
+        "balanced_accuracy": float(balanced_accuracy_score(y_true, y_pred)),
+        "precision_macro": float(precision_score(y_true, y_pred, average="macro", zero_division=0)),
+        "precision_weighted": float(precision_score(y_true, y_pred, average="weighted", zero_division=0)),
+        "recall_macro": float(recall_score(y_true, y_pred, average="macro", zero_division=0)),
+        "recall_weighted": float(recall_score(y_true, y_pred, average="weighted", zero_division=0)),
+        "f1_macro": float(f1_score(y_true, y_pred, average="macro", zero_division=0)),
+        "f1_weighted": float(f1_score(y_true, y_pred, average="weighted", zero_division=0)),
+        "f1_micro": float(f1_score(y_true, y_pred, average="micro", zero_division=0)),
+        "matthews_correlation_coefficient": float(matthews_corrcoef(y_true, y_pred)),
+        "cohen_kappa": float(cohen_kappa_score(y_true, y_pred)),
+        "roc_auc_from_anomaly_score": roc_auc,
+        "average_precision_from_anomaly_score": average_precision,
+    }
+    return {
+        "model": "isolation_forest",
+        "target": "binary_normal_vs_attack",
+        "evaluation_split": str(TEST_V2_CLEAN_PARQUET),
+        "label_mapping": {"Normal": 0, "Attack": 1},
+        "test_rows": int(len(categories)),
+        "overall": overall,
+        "per_class": per_class,
+        "confusion_matrix": {
+            "labels_in_order": ["Normal (0)", "Attack (1)"],
+            "rows_actual_columns_predicted": matrix.tolist(),
+        },
+        "classification_report": classification_report(
+            y_true,
+            y_pred,
+            labels=labels,
+            target_names=["Normal", "Attack"],
+            output_dict=True,
+            zero_division=0,
+        ),
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Score saved category models on the held-out test set; does not train."
@@ -128,8 +202,8 @@ def main() -> None:
         "--models",
         nargs="+",
         choices=tuple(MODEL_PATHS),
-        default=["decision_tree", "lightgbm"],
-        help="Models to evaluate (default: decision_tree and lightgbm).",
+        default=list(MODEL_PATHS),
+        help="Models to evaluate (default: all four models).",
     )
     args = parser.parse_args()
 
@@ -158,7 +232,10 @@ def main() -> None:
 
     for name in args.models:
         print(f"Evaluating {name} on {len(test):,} test rows...", flush=True)
-        if name == "cnn":
+        if name == "isolation_forest":
+            model = joblib.load(MODEL_PATHS[name])
+            metrics = evaluate_isolation_forest(model, X_test, test["category"])
+        elif name == "cnn":
             import tensorflow as tf
 
             network = tf.keras.models.load_model(MODEL_PATHS[name])
@@ -171,16 +248,19 @@ def main() -> None:
             )
         else:
             model = joblib.load(MODEL_PATHS[name])
-        metrics = evaluate_model(name, model, X_test, y_test)
-        report_path = report_dir / f"{name}_category_test_metrics.json"
+            metrics = evaluate_model(name, model, X_test, y_test)
+        report_target = "binary" if name == "isolation_forest" else "category"
+        report_path = report_dir / f"{name}_{report_target}_test_metrics.json"
         report_path.write_text(json.dumps(metrics, indent=2), encoding="utf-8")
-        comparison_rows.append({"model": name, **metrics["overall"]})
+        comparison_rows.append(
+            {"model": name, "target": metrics["target"], **metrics["overall"]}
+        )
         print(f"  Accuracy: {metrics['overall']['accuracy']:.6f}")
         print(f"  Balanced accuracy: {metrics['overall']['balanced_accuracy']:.6f}")
         print(f"  Macro F1: {metrics['overall']['f1_macro']:.6f}")
         print(f"  Saved: {report_path}")
 
-    comparison_path = report_dir / "category_model_test_comparison.csv"
+    comparison_path = report_dir / "model_test_comparison.csv"
     pd.DataFrame(comparison_rows).to_csv(comparison_path, index=False)
     print(f"Saved model comparison: {comparison_path}")
     print("No model was fitted or tuned; the test split was used only for evaluation.")
